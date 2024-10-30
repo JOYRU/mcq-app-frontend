@@ -2,13 +2,12 @@
 import React from 'react';
 import QuestionForm from './components/QuestionForm';
 import QuestionList from './components/QuestionList';
+import Quiz from './components/Quiz/Quiz.jsx';
 
 const App = () => {
   return (
     <div>
-      <h1>MCQ Management</h1>
-      <QuestionForm />
-      <QuestionList />
+     <Quiz />
     </div>
   );
 };
