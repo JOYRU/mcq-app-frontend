@@ -41,8 +41,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB
- const mongodbURL = "mongodb+srv://joycseru:f01765711177@cluster0.l9t1yml.mongodb.net/mcq-app" 
-
+ const mongodbURL =process.env.mongodbURL ;
+console.log(mongodbURL)
 mongoose.connect(mongodbURL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error(err));
