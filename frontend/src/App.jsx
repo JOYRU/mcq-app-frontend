@@ -2,12 +2,14 @@
 import React from 'react';
 import QuestionForm from './components/QuestionForm';
 import QuestionList from './components/QuestionList';
-import Quiz from './components/Quiz/Quiz.jsx';
+import CreateQuestion from './components/Question/createQuestion';
 
 const App = () => {
   return (
     <div>
-     <Quiz />
+     {/* <Quiz /> */}
+
+ <CreateQuestion/>
     </div>
   );
 };

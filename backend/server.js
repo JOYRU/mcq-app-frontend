@@ -35,18 +35,21 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB
- const mongodbURL =process.env.mongodbURL ;
-console.log(mongodbURL)
-mongoose.connect(mongodbURL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.error(err));
 
+ const mongodbURL = process.env.mongodbURL ; 
+ 
+ // connect to db and run server 
+ app.listen(PORT,async()=>{   
+     console.log('server is running on port') ;    
+     await mongoose.connect(mongodbURL) ; 
+     console.log('Connection to db Successfully established') ;
+ })
 // Define Question schema and model
 const questionSchema = new mongoose.Schema({
     question: String,
