@@ -8,11 +8,15 @@ const CreateQuestion = () => {
     const [formData,setFormData] = useState({})
     // const [departments,setDepartments] = useState([]) ;
   
+  
     
     const handleChange= (e)=>{
       const{name,value}= e.target 
-  
-        setFormData((prevData)=> ({...prevData,[name]:value}))
+     
+          setFormData((prevData)=> ({...prevData,[name]:value}))
+     
+        
+       
       
     }
     // useEffect(()=>{
@@ -50,6 +54,7 @@ const CreateQuestion = () => {
         //   console.log(fieldName, inputData[fieldName]);
         //   formData.append(fieldName, inputData[fieldName]);
         // })
+        //console.log(formData)
 
         let formDataObj = new FormData();
         Object.keys(formData).forEach(key=>{
@@ -57,13 +62,15 @@ const CreateQuestion = () => {
           formDataObj.append(key,formData[key])
         })
 
-        console.log(formDataObj)
+       // console.log(formDataObj)
     
         try{
          
-        //   const response = await axios.post('http://localhost:5000/api/employees/add', formDataObj);
+          const response = await axios.post('http://localhost:5000/questions/add', formData);
     
-            
+          if(response){
+            console.log(response)
+          }
             // if(response){
             //    navigate("/admin-dashboard/employees")
             // }
@@ -88,30 +95,32 @@ const CreateQuestion = () => {
         </div>
         {/*employee id*/}
         <div>
-            <label htmlFor="options">Option 1</label>
+            <label htmlFor="option1">Option 1</label>
             <input type="text" placeholder='Employee Id' 
-             name="options.option1"
+             name="option1"
              onChange={handleChange}
             className='mt-1 p-2 block w-full border border-gray-300 rounded-md' />
         </div>
         <div>
-            <label htmlFor="options">Option 2</label>
+            <label htmlFor="option2">Option 2</label>
             <input type="text" placeholder='Employee Id' 
-             name="options.option2"
+             name="option2"
              onChange={handleChange}
             className='mt-1 p-2 block w-full border border-gray-300 rounded-md' />
         </div>
         <div>
-            <label htmlFor="options">Option 3</label>
+            <label htmlFor="option3">Option 3</label>
             <input type="text" placeholder='Option 3' 
-             name="options.option3"
+             name="option3"
+          
              onChange={handleChange}
             className='mt-1 p-2 block w-full border border-gray-300 rounded-md' />
         </div>
         <div>
-            <label htmlFor="options">Option 4</label>
+            <label htmlFor="option4">Option 4</label>
             <input type="text" placeholder='Option 4' 
-             name="options.option4"
+             name="option4"
+         
              onChange={handleChange}
             className='mt-1 p-2 block w-full border border-gray-300 rounded-md' />
         </div>
@@ -173,7 +182,7 @@ const CreateQuestion = () => {
         </div> */}
       
 
-        <button type="submit" className='w-full mt-6 bg-teal-600 hover:bg-teal-800 text-white font-bold py-2 px-4 rounded'>Add Employee</button>
+        <button type="submit" className='w-full mt-6 bg-teal-600 hover:bg-teal-800 text-white font-bold py-2 px-4 rounded'>Add Question</button>
     </form>
   </div>
   )
