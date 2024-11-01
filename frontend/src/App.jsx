@@ -1,15 +1,14 @@
 // frontend/src/App.js
 import React from 'react';
-import QuestionForm from './components/QuestionForm';
-import QuestionList from './components/QuestionList';
-import CreateQuestion from './components/Question/createQuestion';
+import QuestionForm from './components/Question/QuestionForm';
+
 
 const App = () => {
   return (
     <div>
      {/* <Quiz /> */}
-
- <CreateQuestion/>
+       <QuestionForm />
+ 
     </div>
   );
 };
