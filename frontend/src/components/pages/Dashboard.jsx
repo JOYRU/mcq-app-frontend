@@ -6,6 +6,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 //import AdminSummary from '../components/dashboard/AdminSummary';
 import Sidebar from '../Dashboard/Sidebar';
 import Navbar from '../Dashboard/Navbar';
+import ExamCard from '../Dashboard/ExamCard';
 const  Dashboard=()=> {
   const navigate = useNavigate()
   //const {user} = useAuth() ;
@@ -16,9 +17,9 @@ const  Dashboard=()=> {
       <Sidebar />
       <div className='flex-1 ml-64 bg-gray-100 h-screen'>
        <Navbar /> 
-       {/* <div>
-        <AdminSummary />
-        </div>   */}
+       <div>
+        <ExamCard />
+        </div>  
         <Outlet />
       </div>
      

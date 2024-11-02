@@ -114,9 +114,9 @@ fetchExams() ;
         />
       </div>
       <div>
-            <label htmlFor="exam_id" className="block text-sm font-medium text-gray-700">department</label>
+            <label htmlFor="exam_id" className="block text-sm font-medium text-gray-700">Exam title</label>
             <select name="exam_id" 
-             onChange={(e) => setExam(e.target.value)}
+             onChange={(e) => setExamId(e.target.value)}
             
              className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
             >
@@ -124,7 +124,7 @@ fetchExams() ;
 
                {
                exams &&  exams.map((exm)=>(                   
-               <option key={exm._id} >{exm.title}</option>
+               <option key={exm._id} value={exm._id} >{exm.title}</option>
                   
                 ))
                }          

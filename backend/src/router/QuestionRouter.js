@@ -1,11 +1,11 @@
 import express from 'express'
 
-import { addQuestion } from '../controller/QuestionController.js';
+import { addQuestion, getQuestions } from '../controller/QuestionController.js';
 
 
 const questionRouter = express.Router() ;
 questionRouter.post('/add',addQuestion)
-// deparmentRouter.get('/',getDepartments)
+questionRouter.get('/:id',getQuestions)
 // deparmentRouter.get('/:id',getDepartment)
 // deparmentRouter.put('/:id',editDepartment)
 // deparmentRouter.delete('/:id',deleteDepartment)

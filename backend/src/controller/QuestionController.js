@@ -24,21 +24,24 @@ const addQuestion =async(req,res,next)=>{
    
 }
 
-// const getDepartments =async(req,res,next)=>{
-   
-//     try{
-//         const departments = await Department.find()
-//         return res.status(200).json({
-//             success:true,
-//             departments
-//         })
+const getQuestions =async(req,res,next)=>{
+      
+  const {id} = req.params ;  
+  console.log(id)
+    try{
+        const questions = await Question.find({exam_id:id})
+        console.log(questions);
+        return res.status(200).json({
+            success:true,
+            questions
+        })
        
-//     }catch(error){
-//        alert(error) 
-//        return res.status(500).json({success:false,error:"get department sever error"})
-//     }
+    }catch(error){
+       alert(error) 
+       return res.status(500).json({success:false,error:"get questions sever error"})
+    }
    
-// }
+}
 
 // const getDepartment=async(req,res)=>{
 //     try{
@@ -89,4 +92,4 @@ const addQuestion =async(req,res,next)=>{
 
 // export  {addQuestion,getDepartments,getDepartment,editDepartment,deleteDepartment}
 
-export {addQuestion}
+export {addQuestion,getQuestions}
