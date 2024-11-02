@@ -1,9 +1,11 @@
 // frontend/src/components/QuestionForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const QuestionForm = () => {
-
+  const[exams,setExams] = useState('') ; 
+  const[exam,setExam] = useState('') ; 
   const [title, setTitle] = useState('');
   const [options, setOptions] = useState({
     option1: '',
@@ -14,6 +16,32 @@ const QuestionForm = () => {
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [examId, setExamId] = useState('');
   const [subject, setSubject] = useState('');
+
+  useEffect(()=>{
+    const fetchExams = async()=>{
+      try{
+        // const response = await axios.get('http://localhost:5000/api/departments',{
+        //   headers: {
+        //     "Authorization" : 'Bearer '+localStorage.getItem('token')
+        //   }
+        // })
+          const response = await axios.get('http://localhost:5000/exams')
+          
+   
+          if(response.data.success){
+           // console.log(response.data.departments)
+            setExams(response.data.exams) 
+         
+           }        
+                 
+      }
+        catch(error){
+       alert(error)
+       }
+
+      }
+fetchExams() ;
+},[])
 
   const handleOptionChange = (e) => {
     const { name, value } = e.target;
@@ -85,15 +113,23 @@ const QuestionForm = () => {
           required
         />
       </div>
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Exam ID:</label>
-        <input
-          type="text"
-          value={examId}
-          onChange={(e) => setExamId(e.target.value)}
-          className="block w-full border border-gray-300 rounded p-2"
-        />
-      </div>
+      <div>
+            <label htmlFor="exam_id" className="block text-sm font-medium text-gray-700">department</label>
+            <select name="exam_id" 
+             onChange={(e) => setExam(e.target.value)}
+            
+             className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
+            >
+              <option value="">Select Exam</option>
+
+               {
+               exams &&  exams.map((exm)=>(                   
+               <option key={exm._id} >{exm.title}</option>
+                  
+                ))
+               }          
+            </select>
+        </div>
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1">Subject:</label>
         <input

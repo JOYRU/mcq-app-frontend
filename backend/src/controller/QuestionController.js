@@ -1,36 +1,25 @@
 //import Department from "../models/Department.js";
 //import successResponse from "./responseController.js";
+import Question from "../models/Question.js";
 
 const addQuestion =async(req,res,next)=>{
    
-    try{
-       
-        console.log(req.body) ;
-        const{title,option1,option2,option3,option4,} = req.body ; 
-           console.log(option1) ; 
-           res.status(201).send('Question create successfully');
-     
-        // const newDept = new Department({
-        //     dept_name,
-        //     description
-        // })
-       ///await newDept.save() ; 
-     // res.status(201).send('User department create successfully');
-      //return res.status(200).json({success:true,department:newDept})
 
-    //   return successResponse(res, {
-    //                 statusCode:200,
-    //                  message:'user login Successfully',
-    //                  token:newDept,
-    //                  user:''
-    //             }) ; 
 
-       
-
-    }catch(error){
-        console.log(error)
-        next() 
-     ///   return res.status(500).json({success:false,error:"server error in department"})
+    const { title, options, correctAnswer, exam_id, subject } = req.body;
+    try {
+      const newQuestion = new Question({
+        title,
+        options,
+        correctAnswer,
+        exam_id,
+        subject,
+      });
+      await newQuestion.save();
+      res.status(201).json(newQuestion);
+    } catch (error) {
+      console.error('Error saving question:', error);
+      res.status(500).json({ message: 'Failed to save question' });
     }
    
 }
