@@ -90,7 +90,7 @@ fetchExams() ;
           required
         />
       </div>
-      {['option1', 'option2', 'option3', 'option4'].map((option, index) => (
+      {/* {['option1', 'option2', 'option3', 'option4'].map((option, index) => (
         <div className="mb-4" key={index}>
           <label className="block text-sm font-medium mb-1">Option {index + 1}:</label>
           <input
@@ -102,7 +102,21 @@ fetchExams() ;
             required
           />
         </div>
-      ))}
+      ))} */}
+
+      {Object.keys(options).map((key) => (
+          <div className="mb-4" key={key}>
+            <label className="block mb-2">{key}:</label>
+            <input
+              type="text"
+              name={key}
+              value={options[key]}
+              onChange={handleOptionChange}
+              className="border rounded p-2 w-full"
+              required
+            />
+          </div>
+        ))}     
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1">Correct Answer:</label>
         <input

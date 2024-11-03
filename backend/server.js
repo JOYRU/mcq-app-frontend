@@ -14,7 +14,8 @@ const PORT = 5000 ;
 app.use(cors());
 app.use(bodyParser.json());
 
- const mongodbURL = process.env.mongodbURL ; 
+//  const mongodbURL = process.env.mongodbURL ; 
+ const mongodbURL = "mongodb+srv://joycseru:f01765711177@cluster0.l9t1yml.mongodb.net/mcq-app"  ; 
 
  app.use('/questions',questionRouter)
  app.use('/exams',examRouter)

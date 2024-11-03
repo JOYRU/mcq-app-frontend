@@ -28,5 +28,26 @@ const getExams =async(req,res,next)=>{
 
 };
 
+const getExam =async(req,res,next)=>{
+    
+    const{id} = req.params ; 
+    //console.log(id)
 
-export {addExam,getExams}
+  try{
+              const exam = await Exam.find({_id:id })
+              return res.status(200).json({
+                  success:true,
+                  exam
+              })
+             
+  }catch(error){
+             alert(error) 
+             return res.status(500).json({success:false,error:"get exam sever error"})
+          }
+
+};
+
+
+
+
+export {addExam,getExams,getExam}

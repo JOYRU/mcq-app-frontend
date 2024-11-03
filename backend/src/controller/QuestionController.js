@@ -27,10 +27,10 @@ const addQuestion =async(req,res,next)=>{
 const getQuestions =async(req,res,next)=>{
       
   const {id} = req.params ;  
-  console.log(id)
+  //console.log(id)
     try{
         const questions = await Question.find({exam_id:id})
-        console.log(questions);
+       // console.log(questions);
         return res.status(200).json({
             success:true,
             questions
