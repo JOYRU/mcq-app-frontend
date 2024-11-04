@@ -89,7 +89,7 @@ const [title, setTitle] = useState('');
             required
           />
         </div>
-        <button type="submit" className="w-full bg-black-800 text-white font-bold py-2 rounded hover:bg-black-900">
+        <button type="submit" className="w-full bg-blue-500 text-black font-bold py-2 rounded hover:bg-blue-800">
           Create Exam
         </button>
       </form>

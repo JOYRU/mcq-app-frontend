@@ -14,12 +14,12 @@ const Sidebar =()=> {
                 {/* <FaTachometerAlt /> */}
                 <span>Dashboard</span>
             </NavLink>
-            <NavLink to="/exam/create"
+            <NavLink to="exam/create"
                className='flex items-center space-x-4 block py-2.5 px-4 rounded'>
                 {/* <FaUsers /> */}
                 <span>Exam</span>
             </NavLink>
-            <NavLink to="/questions/add"
+            <NavLink to="questions/add"
                className='flex items-center space-x-4 block py-2.5 px-4 rounded'>
                 {/* <FaBuilding /> */}
                 <span>Create Question</span>
