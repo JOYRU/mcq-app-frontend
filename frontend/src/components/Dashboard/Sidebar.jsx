@@ -30,10 +30,10 @@ const Sidebar =()=> {
                 <span>Leaves</span>
             </NavLink> */}
 
-            <NavLink to="/dashboard"
+            <NavLink to="/dashboard/archive-exam-list"
               className='flex items-center space-x-4 block py-2.5 px-4 rounded'>
                 {/* <FaBuilding /> */}
-                <span>Salary</span>
+                <span>Archive Exam</span>
             </NavLink>
 
 

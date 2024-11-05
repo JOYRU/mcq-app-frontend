@@ -68,6 +68,7 @@ const ExamDetails = () => {
                      clearInterval(timer);
                      setIsExamFinished(true);
                      setTimeLeft(0);
+                     handleSubmit();
                    } else {
                      setTimeLeft(remainingTime);
                    }
