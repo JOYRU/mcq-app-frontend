@@ -15,7 +15,7 @@ const Register = () => {
         setSuccess('');
 
         try {
-            const response = await axios.post('/api/register', { name, mobile_number, password });
+            const response = await axios.post('http://localhost:5000/auth/register', { name, mobile_number, password });
             setSuccess('Registration successful! You can now log in.');
         } catch (err) {
             setError(err.response.data.message);

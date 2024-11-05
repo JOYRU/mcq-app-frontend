@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import questionRouter from "./src/router/QuestionRouter.js";
 import examRouter from "./src/router/ExamRouter.js";
+import authRouter from "./src/router/AuthRouter.js";
 
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 
  app.use('/questions',questionRouter)
  app.use('/exams',examRouter)
+ app.use('/auth',authRouter)
 
  
  // connect to db and run server 

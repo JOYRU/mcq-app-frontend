@@ -1,6 +1,6 @@
 // src/context/AuthContext.js
-import React, { createContext, useState, useEffect } from 'react';
-import jwtDecode from 'jwt-decode';
+import React, { createContext, useState, useEffect,useContext } from 'react';
+import {jwtDecode} from 'jwt-decode';
 
 export const AuthContext = createContext();
 
@@ -31,3 +31,5 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
+export const useAuth = () => useContext(AuthContext)
