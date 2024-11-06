@@ -12,19 +12,32 @@ const  Dashboard=()=> {
   //const {user} = useAuth() ;
   
   return (
-    <div className='flex'>
-      {/* <AdminSidebar /> */}
-      <Sidebar />
-      <div className='flex-1 ml-64 bg-gray-100 h-screen'>
-       <Navbar /> 
-       <div>
-        <ExamCard />
-        </div>  
-        <Outlet />
-      </div>
+    // <div className='flex'>
+    //   {/* <AdminSidebar /> */}
+    //   <Sidebar />
+    //   <div className='flex-1 ml-64 bg-gray-100 h-screen'>
+    //    <Navbar /> 
+    //    {/* <div>
+    //     <ExamCard />
+    //   </div>   */}
+    //     <Outlet />
+    //   </div>
      
+    // </div>
+
+    <div className='flex'>
+    <Sidebar />
+    <div className='flex-1 ml-64 bg-gray-100 h-screen'>
+     <Navbar /> 
+     {/* <div>
+      <AdminSummary />
+      </div>   */}
+      <Outlet />
     </div>
-  )
+   
+  </div>
+)
+  
 }
 
 export default Dashboard

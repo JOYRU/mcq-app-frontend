@@ -1,7 +1,7 @@
 // frontend/src/App.js
 import React from 'react';
 // import {BrowserRouter as  Router,Routes,Route,Navigate, BrowserRouter} from 'react-router-dom'
-import {BrowserRouter as Router,Routes,Route,Navigate, BrowserRouter} from 'react-router-dom'
+import {BrowserRouter as Router,Routes,Route,Navigate, BrowserRouter , useLocation} from 'react-router-dom'
 import QuestionForm from './components/Question/QuestionForm';
 import ExamForm from './components/Exam/CreateExam';
 import './index.css'
@@ -15,6 +15,9 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import ArchiveExam from './components/Exam/ArchiveExam';
 import ArchiveExamDetails from './components/Exam/ArchiveExamDetails';
+import Sidebar from './components/Dashboard/Sidebar';
+import Navbar from './components/Dashboard/Navbar';
+import Layout from './components/pages/Layout';
 
 
 // const App = () => {
@@ -80,15 +83,40 @@ import ArchiveExamDetails from './components/Exam/ArchiveExamDetails';
 //  export default App;
 
 function App() {
+
+
   return (
      <AuthProvider>
     <BrowserRouter>
-      
-        <Routes>
+
+       <div className="app-container">
+           <div className="content-area">
+           <Routes>
+           {/* Layout start */}
+            
+           <Route path="/" element={<Layout />}>
+           <Route path="/dashboard" element={         
+           <PrivateRoute>
+              <Layout />
+           </PrivateRoute>
+        }  
+        /> 
+         <Route path="dashboard/questions/add" element={<QuestionForm/>}></Route>
+          <Route path="dashboard/exam/create" element={<ExamForm />}></Route>
+          <Route path="exam/:id" element={<ExamDetails />}></Route>
+          
+          <Route path="dashboard/archive-exam-list" element={<ArchiveExam/>}></Route>
+          <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails/>}></Route>
+           </Route>
+            {/* Layout end */}
+
+
+
+
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forget-password" element={<ForgotPassword />} />
-           <Route path="/dashboard" element={         
+           {/* <Route path="/dashboard" element={         
            <PrivateRoute>
               <Dashboard />
            </PrivateRoute>
@@ -100,12 +128,15 @@ function App() {
           
           <Route path="dashboard/archive-exam-list" element={<ArchiveExam/>}></Route>
           <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails/>}></Route>
-          dashboard/archive-exam/
+          dashboard/archive-exam/ */}
           
           {/* Default route */}
           <Route path="/" element={<Navigate to="/login" />} />
         </Routes>
      
+           </div>
+       </div>
+        
  
    </BrowserRouter>
      </AuthProvider>
