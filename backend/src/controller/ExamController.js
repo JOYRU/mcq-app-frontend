@@ -1,4 +1,5 @@
 import Exam from "../models/Exam.js";
+import Question from "../models/Question.js";
 const addExam =async(req,res,next)=>{
 
     const {title, start_time, time_duration } = req.body;
@@ -47,7 +48,22 @@ const getExam =async(req,res,next)=>{
 
 };
 
+const generateQuestion = async(req,res,next)=>{
+
+  const { subject, quantity } = req.query; // Subject and quantity of questions
+
+  try {
+    const questions = await Question.aggregate([
+      { $match: { subject } },  // Filter by subject
+      { $sample: { size: parseInt(quantity) } }  // Randomly select 'quantity' questions
+    ]);
+    
+    res.json(questions);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching questions' });
+  }
+}
 
 
 
-export {addExam,getExams,getExam}
+export {addExam,getExams,getExam,generateQuestion}
