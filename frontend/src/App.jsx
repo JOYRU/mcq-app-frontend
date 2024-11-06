@@ -18,6 +18,8 @@ import ArchiveExamDetails from './components/Exam/ArchiveExamDetails';
 import Sidebar from './components/Dashboard/Sidebar';
 import Navbar from './components/Dashboard/Navbar';
 import Layout from './components/pages/Layout';
+import SubjectList from './components/SubjectList';
+import ExamCreator from './components/Exam/ExamCreator';
 
 
 // const App = () => {
@@ -107,6 +109,8 @@ function App() {
           
           <Route path="dashboard/archive-exam-list" element={<ArchiveExam/>}></Route>
           <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails/>}></Route>
+          <Route path="dashboard/subject-list" element={<SubjectList/>}></Route>
+          <Route path="dashboard/generate-question" element={<ExamCreator/>}></Route>
            </Route>
             {/* Layout end */}
 

@@ -35,6 +35,16 @@ const Sidebar =()=> {
                 {/* <FaBuilding /> */}
                 <span>Archive Exam</span>
             </NavLink>
+            <NavLink to="/dashboard/subject-list"
+              className='flex items-center space-x-4 block py-2.5 px-4 rounded'>
+                {/* <FaBuilding /> */}
+                <span>Subject Wise Question</span>
+            </NavLink>
+            <NavLink to="/dashboard/generate-question"
+              className='flex items-center space-x-4 block py-2.5 px-4 rounded'>
+                {/* <FaBuilding /> */}
+                <span>Generate Question Randomly</span>
+            </NavLink>
 
 
         </div>
