@@ -186,6 +186,7 @@ import moment from 'moment';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const ExamDetails = () => {
+
   const { id } = useParams();
   const [isExamFinished, setIsExamFinished] = useState(false);
   const [isExamStart, setIsExamStart] = useState(true);
@@ -203,12 +204,15 @@ const ExamDetails = () => {
   useEffect(() => {
     const fetchExamData = async () => {
       setLoading(true);
+
       try {
-        const response = await axios.get(`http://localhost:5000/questions/${id}`);
+      ///  const response = await axios.get(`http://localhost:5000/questions/${id}`);
         const response2 = await axios.get(`http://localhost:5000/exams/${id}`);
+        //console.log(response)  ; 
+        console.log(response2.data.exam[0].questions)  ; 
         
         if (response.data.success && response2.data.success) {
-          setQuestions(response.data.questions);
+          setQuestions(response2.data.exam[0].questions);
           setExam(response2.data.exam);
 
           const examDuration = response2.data.exam[0].time_duration;

@@ -7,4 +7,4 @@ examRouter.get('/',getExams)
 examRouter.get('/:id',getExam)
 examRouter.get('/generate-questions',generateQuestion)
 
-export default examRoutercd
+export default examRouter

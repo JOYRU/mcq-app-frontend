@@ -20,7 +20,7 @@ const PrivateRoute = ({ children }) => {
   const {user} = useAuth();
   // const users = Object.fromEntries(user);
    
-    console.log(user) ;
+    ///console.log(user) ;
  
 
    const token = localStorage.getItem('token') ; 

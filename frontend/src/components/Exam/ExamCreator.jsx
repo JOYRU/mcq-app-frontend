@@ -22,18 +22,21 @@ const ExamCreator = () => {
   const handleGenerateExam = async () => {
     setLoading(true);
     try {
-      const questions = [];
+       const questions = [];
       for (const subject of subjects) {
         if (subject.questions > 0) {
-          // Fetch random questions from the backend API
-          const response = await axios.get('http://localhost:5000/exam/generate-questions', {
+          //Fetch random questions from the backend API
+          console.log(subjects)
+          const response = await axios.get('http://localhost:5000/exams/generate-questions', {
             params: { subject: subject.name, quantity: subject.questions },
           });
-          questions.push({ subject: subject.name, questions: response.data });
+          console.log(response) ;
+          // questions.push({ subject: subject.name, questions: response.data });
         }
       }
       setExamQuestions(questions);
-    } catch (error) {
+    }
+     catch (error) {
       console.error('Error generating exam:', error);
     } finally {
       setLoading(false);

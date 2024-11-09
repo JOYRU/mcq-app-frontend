@@ -32,10 +32,10 @@ const getExams =async(req,res,next)=>{
 const getExam =async(req,res,next)=>{
     
     const{id} = req.params ; 
-    //console.log(id)
+    console.log("hello")
 
   try{
-              const exam = await Exam.find({_id:id })
+              const exam = await Exam.find({_id:id }).populate('questions')
               return res.status(200).json({
                   success:true,
                   exam
@@ -51,14 +51,18 @@ const getExam =async(req,res,next)=>{
 const generateQuestion = async(req,res,next)=>{
 
   const { subject, quantity } = req.query; // Subject and quantity of questions
+  console.log(subject) ; 
 
   try {
-    const questions = await Question.aggregate([
-      { $match: { subject } },  // Filter by subject
-      { $sample: { size: parseInt(quantity) } }  // Randomly select 'quantity' questions
-    ]);
+    // const questions = await Question.aggregate([
+    //   { $match: { subject } },  // Filter by subject
+    //   { $sample: { size: parseInt(quantity) } }  // Randomly select 'quantity' questions
+    // ]);
+    //const questions = await Question.find({suject:subject})
+    const questions = "" ; 
     
     res.json(questions);
+    console.log(questions);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching questions' });
   }

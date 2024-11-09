@@ -1,6 +1,7 @@
 //import Department from "../models/Department.js";
 //import successResponse from "./responseController.js";
 import Question from "../models/Question.js";
+import Exam from "../models/Exam.js";
 
 const addQuestion =async(req,res,next)=>{
    
@@ -16,6 +17,15 @@ const addQuestion =async(req,res,next)=>{
         subject,
       });
       await newQuestion.save();
+
+      const updatedExam = await Exam.findByIdAndUpdate(
+        exam_id,
+        { $push: { questions: {newQuestion} } },  // Add fetched questions to the exam document
+        { new: true }  // Return updated exam
+      );
+
+
+
       res.status(201).json(newQuestion);
     } catch (error) {
       console.error('Error saving question:', error);
@@ -42,6 +52,56 @@ const getQuestions =async(req,res,next)=>{
     }
    
 }
+
+
+const RandomlySetQuestions =async(req,res,next)=>{
+  console.log("JOY") ;
+  // const { subject, quantity } = req.query;
+
+  // try {
+  //   const questions = await Question.find({ subject: subject })
+  //     .limit(Number(quantity))  // Limit the number of questions based on the quantity parameter
+  //     .exec();
+    
+  //   res.json(questions);
+  // } catch (error) {
+  //   res.status(500).json({ message: 'Error fetching questions' });
+  // }
+  const { subject, quantity, examId } = req.query;
+
+  // Validation
+  if (!subject || !quantity || !examId) {
+    return res.status(400).json({ message: 'Subject, quantity, and examId are required' });
+  }
+
+  try {
+    // Fetch random questions based on subject and quantity
+    const questions = await Question.aggregate([
+      { $match: { subject: subject } },  // Match questions with the subject
+      { $sample: { size: Number(quantity) } }  // Get random questions
+    ]);
+
+    if (questions.length === 0) {
+      return res.status(404).json({ message: `No questions found for subject: ${subject}` });
+    }
+
+    // Update the exam with the fetched questions by examId
+    const updatedExam = await Exam.findByIdAndUpdate(
+      examId,
+      { $push: { questions: { $each: questions } } },  // Add fetched questions to the exam document
+      { new: true }  // Return updated exam
+    );
+    console.log(updatedExam) ;
+    res.json(updatedExam); 
+     // Send the updated exam with questions
+  } catch (error) {
+    console.error('Error fetching random questions and updating exam:', error);
+    res.status(500).json({ message: 'Error fetching random questions and updating exam' });
+  }
+};
+
+
+
 
 // const getDepartment=async(req,res)=>{
 //     try{
@@ -92,4 +152,4 @@ const getQuestions =async(req,res,next)=>{
 
 // export  {addQuestion,getDepartments,getDepartment,editDepartment,deleteDepartment}
 
-export {addQuestion,getQuestions}
+export {addQuestion,getQuestions,RandomlySetQuestions }

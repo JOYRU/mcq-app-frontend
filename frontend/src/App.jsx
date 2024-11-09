@@ -99,7 +99,7 @@ function App() {
            <Route path="/" element={<Layout />}>
            <Route path="/dashboard" element={         
            <PrivateRoute>
-              <Layout />
+              <Dashboard />
            </PrivateRoute>
         }  
         /> 

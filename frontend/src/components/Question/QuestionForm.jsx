@@ -144,15 +144,21 @@ fetchExams() ;
                }          
             </select>
         </div>
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-1">Subject:</label>
-        <input
-          type="text"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          className="block w-full border border-gray-300 rounded p-2"
-        />
-      </div>
+        <div className="mb-4">
+  <label className="block text-sm font-medium mb-1">Subject:</label>
+  <select
+    value={subject}
+    onChange={(e) => setSubject(e.target.value)}
+    className="block w-full border border-gray-300 rounded p-2"
+  >
+    <option value="bangla1st">Bangla 1st Paper</option>
+    <option value="bangla2nd">Bangla 2nd Paper</option>
+    <option value="physics">Physics</option>
+    <option value="math">Math</option>
+    <option value="chemistry">Chemistry</option>
+    <option value="biology">Biology</option>
+  </select>
+</div>
       <button type="submit" className="w-full bg-blue-500 text-white font-bold py-2 rounded hover:bg-blue-600">
         Submit Question
       </button>
