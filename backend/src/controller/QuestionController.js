@@ -2,6 +2,7 @@
 //import successResponse from "./responseController.js";
 import Question from "../models/Question.js";
 import Exam from "../models/Exam.js";
+import mongoose from "mongoose";
 
 const addQuestion =async(req,res,next)=>{
    
@@ -18,11 +19,13 @@ const addQuestion =async(req,res,next)=>{
       });
       await newQuestion.save();
 
-      const updatedExam = await Exam.findByIdAndUpdate(
-        exam_id,
-        { $push: { questions: {newQuestion} } },  // Add fetched questions to the exam document
-        { new: true }  // Return updated exam
-      );
+      const exam = await Exam.findById(exam_id); // Assuming exam_id is the 
+
+  
+      exam.questions.push(newQuestion._id);
+      
+      // Save the updated exam document
+      await exam.save();
 
 
 
@@ -52,6 +55,26 @@ const getQuestions =async(req,res,next)=>{
     }
    
 }
+const getQuestionsSubject =async(req,res,next)=>{
+      
+ /// const {subject} = req.params ;  
+  const { subject } = req.query;
+  console.log(subject) ;
+    try{
+        const questions = await Question.find({subject:subject})
+       // console.log(questions);
+        return res.status(200).json({
+            success:true,
+            questions
+        })
+       
+    }catch(error){
+       alert(error) 
+       return res.status(500).json({success:false,error:"get questions sever error"})
+    }
+   
+}
+
 
 
 const RandomlySetQuestions =async(req,res,next)=>{
@@ -152,4 +175,4 @@ const RandomlySetQuestions =async(req,res,next)=>{
 
 // export  {addQuestion,getDepartments,getDepartment,editDepartment,deleteDepartment}
 
-export {addQuestion,getQuestions,RandomlySetQuestions }
+export {addQuestion,getQuestions,RandomlySetQuestions , getQuestionsSubject }

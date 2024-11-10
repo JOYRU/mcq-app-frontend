@@ -211,7 +211,7 @@ const ExamDetails = () => {
         //console.log(response)  ; 
         console.log(response2.data.exam[0].questions)  ; 
         
-        if (response.data.success && response2.data.success) {
+        if ( response2.data.success) {
           setQuestions(response2.data.exam[0].questions);
           setExam(response2.data.exam);
 
