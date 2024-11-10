@@ -2,24 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-// const questions = 
-//  [
-//     { question: 'What is 2 + 2?', options: ['3', '4', '5'], correctAnswer: '4' },
-//     { question: 'What is the capital of Mathland?', options: ['MathCity', 'Mathopolis'], correctAnswer: 'MathCity' }
-//   ]
-
 
 const SubjectQuestions = () => {
    const { subject } = useParams();
    const [questions, setQuestions] = useState([]);
-   const [loading,setLoading] = useState(false)
+   const [loading,setLoading] = useState(false) ; 
+   
+const [showAnswers, setShowAnswers] = useState({}); // Track which answers are visible
+const [showExplanations, setShowExplanations] = useState({});
 
    useEffect(() => {
     const fetchQuestions = async () => {
       try {
         // Fetch exam details and questions from the API
-        console.log("hellofromfetchQuestionsPage") ; 
-        const response = await axios.get(`http://localhost:5000/questions/subject`,{
+       
+        const response = await axios.get('http://localhost:5000/questions/subject/question',{
           params: {
             subject: subject
            
@@ -27,7 +24,7 @@ const SubjectQuestions = () => {
 
         });
        
-        console.log(response.data) ; 
+      //  console.log(response.data) ; 
         if (response.data.success) {
          
           setQuestions(response.data.questions);
@@ -42,28 +39,88 @@ const SubjectQuestions = () => {
     fetchQuestions();
  
   }, [subject]);
+
+  const handleShowAnswer = (questionId) => {
+    setShowAnswers(prevState => ({
+      ...prevState,
+      [questionId]: !prevState[questionId] // Toggle visibility of the correct answer
+    }));
+  };
+  
+  const handleShowExplanation = (questionId) => {
+      setShowExplanations((prevState) => ({
+        ...prevState,
+        [questionId]: !prevState[questionId],
+      }));
+    };
+  
+  if (loading) {
+    return <p>Loading exam details...</p>;
+  }
+  
   
 
    return (
-    <div>
-      <h1>{subject} Questions</h1>
-      <ul>
-        {questions.length > 0 ? (
-          questions.map((question, index) => (
-            <li key={index}>
-              <p>{question.question}</p>
-              <ul>
-                {question.options.map((option, idx) => (
-                  <li key={idx}>{option}</li>
-                ))}
-              </ul>
-            </li>
-          ))
-        ) : (
-          <p>No questions available for this subject.</p>
+    <div className="max-w-3xl mx-auto p-4">
+   
+    <h2 className="text-xl font-semibold mb-4">Questions</h2>
+
+    {questions.map((question) => (
+      <div key={question._id} className="mb-6 p-4 border rounded shadow-md bg-white">
+        <h3 className="text-lg font-semibold mb-2">{question.title}</h3>
+        
+        <div className="flex flex-col">
+          {Object.keys(question.options[0]).map((key) => {
+            if (key === "_id") return null; // Skip the "_id" key
+
+            return (
+              <label key={key} className="flex items-center mb-2">
+                <input
+                  type="radio"
+                  name={question._id}
+                  value={key}
+                  disabled
+                  className="mr-2"
+                />
+                {question.options[0][key]}
+              </label>
+            );
+          })}
+        </div>
+
+        <button
+          onClick={() => handleShowAnswer(question._id)}
+          className="mt-2 text-blue-600 hover:underline"
+        >
+          {showAnswers[question._id] ? 'Hide Correct Answer' : 'Show Correct Answer'}
+        </button>
+
+        {showAnswers[question._id] && (
+          <p className="mt-2 text-sm text-green-600">
+            Correct Answer: {question.correctAnswer}
+          </p>
         )}
-      </ul>
-    </div>
+       {question.explanation && (
+                    <>
+                      <button
+                        onClick={() => handleShowExplanation(question._id)}
+                        className="mt-2 text-blue-600 hover:underline"
+                      >
+                        {showExplanations[question._id]
+                          ? 'Hide Explanation'
+                          : 'Show Explanation'}
+                      </button>
+                      {showExplanations[question._id] && (
+                        <p className="mt-2 text-sm text-gray-600">
+                          Explanation: {question.explanation}
+                        </p>
+                      )}
+                      </>
+                  )}
+      </div>
+    ))}
+  </div>
+     
 
   );
 };

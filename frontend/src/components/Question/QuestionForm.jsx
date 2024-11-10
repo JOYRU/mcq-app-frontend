@@ -20,20 +20,13 @@ const QuestionForm = () => {
   useEffect(()=>{
     const fetchExams = async()=>{
       try{
-        // const response = await axios.get('http://localhost:5000/api/departments',{
-        //   headers: {
-        //     "Authorization" : 'Bearer '+localStorage.getItem('token')
-        //   }
-        // })
+      
           const response = await axios.get('http://localhost:5000/exams')
           
-   
           if(response.data.success){
            // console.log(response.data.departments)
-            setExams(response.data.exams) 
-         
-           }        
-                 
+            setExams(response.data.exams)      
+           }                       
       }
         catch(error){
        alert(error)
@@ -90,19 +83,6 @@ fetchExams() ;
           required
         />
       </div>
-      {/* {['option1', 'option2', 'option3', 'option4'].map((option, index) => (
-        <div className="mb-4" key={index}>
-          <label className="block text-sm font-medium mb-1">Option {index + 1}:</label>
-          <input
-            type="text"
-            name={option}
-            value={options[option]}
-            onChange={handleOptionChange}
-            className="block w-full border border-gray-300 rounded p-2"
-            required
-          />
-        </div>
-      ))} */}
 
       {Object.keys(options).map((key) => (
           <div className="mb-4" key={key}>

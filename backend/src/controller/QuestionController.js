@@ -1,5 +1,3 @@
-//import Department from "../models/Department.js";
-//import successResponse from "./responseController.js";
 import Question from "../models/Question.js";
 import Exam from "../models/Exam.js";
 import mongoose from "mongoose";
@@ -55,6 +53,26 @@ const getQuestions =async(req,res,next)=>{
     }
    
 }
+
+const getQuestionsDependOnSubject = async(req,res,next)=>{
+
+  const subject = req.query ; 
+
+  try{
+    const questions = await Question.find(subject) ; 
+   // console.log(questions);
+    return res.status(200).json({
+        success:true,
+        questions
+    })
+   
+}catch(error){
+   alert(error) 
+   return res.status(500).json({success:false,error:"get questions sever error"})
+}
+}
+
+
 const getQuestionsSubject =async(req,res,next)=>{
       
  /// const {subject} = req.params ;  
@@ -78,18 +96,7 @@ const getQuestionsSubject =async(req,res,next)=>{
 
 
 const RandomlySetQuestions =async(req,res,next)=>{
-  console.log("JOY") ;
-  // const { subject, quantity } = req.query;
 
-  // try {
-  //   const questions = await Question.find({ subject: subject })
-  //     .limit(Number(quantity))  // Limit the number of questions based on the quantity parameter
-  //     .exec();
-    
-  //   res.json(questions);
-  // } catch (error) {
-  //   res.status(500).json({ message: 'Error fetching questions' });
-  // }
   const { subject, quantity, examId } = req.query;
 
   // Validation
@@ -124,55 +131,4 @@ const RandomlySetQuestions =async(req,res,next)=>{
 };
 
 
-
-
-// const getDepartment=async(req,res)=>{
-//     try{
-//         const {id} = req.params ; 
-//         const department= await Department.findById({_id:id}) ;
-//         return res.status(200).json({success:true,department})
-
-//     }catch(error){
-//         alert(error)
-//     }
-// }
-
-
-// const editDepartment=async(req,res)=>{
-//     try{
-//         const {id} = req.params ; 
-//         console.log(id) ; 
-//         const{dept_name,description} = req.body ; 
-//          const updataDept = await Department.findByIdAndUpdate({_id: id},{
-//             dept_name,
-//             description
-//          }) ; 
-
-//      // res.status(201).send('User department create successfully');
-//       return res.status(200).json({success:true,department:updataDept})
-
-//     }catch(error){
-//        console.log(error)
-//     }
-// }
-
-// const deleteDepartment=async(req,res)=>{
-//     try{
-//         const {id} = req.params ; 
-//         console.log(id);
-     
-    
-//          const deleteDept = await Department.findByIdAndDelete({_id: id}) ; 
-
-//      // res.status(201).send('User department create successfully');
-//       return res.status(200).json({success:true,department:deleteDept})
-
-//     }catch(error){
-//        console.log(error)
-//     }
-// }
-
-
-// export  {addQuestion,getDepartments,getDepartment,editDepartment,deleteDepartment}
-
-export {addQuestion,getQuestions,RandomlySetQuestions , getQuestionsSubject }
+export {addQuestion,getQuestions,RandomlySetQuestions , getQuestionsSubject , getQuestionsDependOnSubject }
