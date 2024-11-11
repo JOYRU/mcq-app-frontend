@@ -1,24 +1,43 @@
 // src/components/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const Register = () => {
     const [name, setName] = useState('');
-    const [mobile_number, setMobileNumber] = useState('');
+    // const [mobile_number, setMobileNumber] = useState('');
+    const [email,setEmail] = useState('')
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState("student");
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
         setSuccess('');
 
+
+    const formData = {
+        name,
+        email,
+        password,
+        role,
+      };
+
         try {
-            const response = await axios.post('http://localhost:5000/auth/register', { name, mobile_number, password });
+            const response = await axios.post('http://localhost:5000/auth/register',formData);
+           if(response.data.success){
+            navigate('/login')
+           }
+
             setSuccess('Registration successful! You can now log in.');
+
+
         } catch (err) {
-            setError(err.response.data.message);
+            setError(err);
         }
     };
 
@@ -38,9 +57,9 @@ const Register = () => {
                 />
                 <input
                     type="text"
-                    value={mobile_number}
-                    onChange={(e) => setMobileNumber(e.target.value)}
-                    placeholder="Mobile Number"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Provide Valid Email"
                     className="border border-gray-300 p-2 mb-4 w-full rounded"
                     required
                 />
@@ -52,6 +71,16 @@ const Register = () => {
                     className="border border-gray-300 p-2 mb-4 w-full rounded"
                     required
                 />
+                  <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    className="border border-gray-300 p-2 mb-4 w-full rounded"
+                    required
+                    >
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="admin">Admin</option>
+                  </select>
                 <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">Register</button>
             </form>
         </div>

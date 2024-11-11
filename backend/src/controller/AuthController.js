@@ -2,6 +2,7 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+
 import User from '../models/User.js'; // Adjust the path as needed
 // import nodemailer from 'nodemailer';
 // import dotenv from 'dotenv';
@@ -11,18 +12,25 @@ import User from '../models/User.js'; // Adjust the path as needed
 
 
 
+
 const Register =async(req,res,next)=>{
 
-    const { name, mobile_number, password } = req.body;
-
-        if (!name || !mobile_number || !password) {
+    const { name, email, password,role } = req.body;
+    console.log(name) ; 
+  
+        if (!name || !email || !password) {
             return res.status(400).json({ message: 'All fields are required' });
         }
     
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ name, mobile_number, password: hashedPassword });
+        const user = new User({ name, email, password: hashedPassword,role});
         await user.save();
-        res.status(201).json({ message: 'User registered' });
+       // alert('User registered Successfully');
+       console.log(user)
+       
+        res.status(201).json({ message: 'User registered Successfully' ,success:'true'
+
+        });
    
 
 };
