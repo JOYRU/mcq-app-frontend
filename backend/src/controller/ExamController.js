@@ -13,6 +13,14 @@ const addExam =async(req,res,next)=>{
     }
 
 };
+
+const examResult = async(req,res,next)=>{
+
+  const {examId,score} = req.body ; 
+  console.log(score)
+  res.status(201).json(score) ; 
+
+}
 const getExams =async(req,res,next)=>{
 
     try{
@@ -70,4 +78,4 @@ const generateQuestion = async(req,res,next)=>{
 
 
 
-export {addExam,getExams,getExam,generateQuestion}
+export {addExam,getExams,getExam,examResult,generateQuestion}

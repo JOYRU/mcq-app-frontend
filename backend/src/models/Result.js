@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const resultSchema = new mongoose.Schema({
-     userId:{type:String,required:true},
-     examId:{type:String, required:true},
+     userId:{type: mongoose.Schema.Types.ObjectId, ref: 'User',required:true},
+     examId:{type: mongoose.Schema.Types.ObjectId, ref: 'Exam', required:true},
      score:{type:String,required:true}
 })
 

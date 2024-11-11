@@ -167,9 +167,21 @@ const ExamForm = () => {
 
           {/* Section to choose between random questions and manual input */}
           <div className="mt-4">
+            <div>
+            <input
+              type="number"
+              value={randomQuestionsCount}
+              onChange={(e) => setRandomQuestionsCount(Number(e.target.value))}
+              className="w-full p-2 border border-gray-300 rounded mb-4"
+              placeholder="Enter number of questions"
+              min="1" // Optional: Ensures the number is positive
+            />
+
             <button onClick={fetchRandomQuestions} className="w-full bg-green-500 text-white py-2 rounded mb-4 hover:bg-green-700">
               Fetch {randomQuestionsCount} Random Questions
             </button>
+            </div>
+            
 
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">Or add a question manually:</label>

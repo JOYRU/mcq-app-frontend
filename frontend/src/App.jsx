@@ -23,68 +23,6 @@ import ExamCreator from './components/Exam/ExamCreator';
 import SubjectQuestions from './components/SujectQuestions';
 
 
-// const App = () => {
-//   return (
-//     <Router>
-//        <Routes>
-//        <Route path="/register" element={<Register />} />
-//        <Route path="/login" element={<Login />} />
-//        <Route path="/forget-password" element={<ForgotPassword />} />
-//        <Route path="/" element={<Navigate to="/login"/>}></Route>
-//          <Route path="dashboard/questions/add" element={<QuestionForm/>}></Route>
-//           <Route path="dashboard/exam/create" element={<ExamForm />}></Route>
-//           <Route path="exam/:id" element={<ExamDetails />}></Route>
-//          <Route path="/dashboard" element={  
-//               <Dashboard /> }>
-//         </Route>
-//         <Route path="/dashboard" element={<ExamCard />}></Route>
-        
-//        </Routes>
-       
-//     </Router>   
- 
-    
-    
-//   );
-// };
-
-//export default App;
-
-
-
-  // // src/App.js
-  // import React from 'react';
-  // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-  // import { AuthProvider } from './context/AuthContext';
-  // import Register from './components/Register';
-  // import Login from './components/Login';
-
-// function App() {
-//     return (
-//       <AuthProvider>
-//         <Router>
-//             <Routes>
-//             <Route path="/register" element={<Register />} />
-//             <Route path="/login" element={<Login />} />
-//             <Route path="/forget-password" element={<ForgotPassword />} />
-//             <Route path="/" element={<Navigate to="/login"/>}></Route>
-//               <Route path="dashboard/questions/add" element={<QuestionForm/>}></Route>
-//                 <Route path="dashboard/exam/create" element={<ExamForm />}></Route>
-//                 <Route path="exam/:id" element={<ExamDetails />}></Route>
-//               <Route path="/dashboard" element={  
-//                     <Dashboard /> }>
-//               </Route>
-//               <Route path="/dashboard" element={<ExamCard />}></Route>
-              
-//        </Routes>
-       
-//       </Router> 
-//      </AuthProvider>
-//             );
-//         }
-        
-//  export default App;
-
 function App() {
 
 
@@ -95,24 +33,21 @@ function App() {
        <div className="app-container">
            <div className="content-area">
            <Routes>
-           {/* Layout start */}
-            
-           <Route path="/" element={<Layout />}>
-           <Route path="/dashboard" element={         
-          <Dashboard />}
-     
-        /> 
-         <Route path="dashboard/questions/add" element={<QuestionForm/>}></Route>
-          <Route path="dashboard/exam/create" element={<ExamForm />}></Route>
-          <Route path="exam/:id" element={<ExamDetails />}></Route>
-          
-          <Route path="dashboard/archive-exam-list" element={<ArchiveExam/>}></Route>
-          <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails/>}></Route>
-          <Route path="dashboard/subject-list" element={<SubjectList/>}></Route>
-          <Route path="dashboard/subject-list/:subject" element={<SubjectQuestions/>}></Route>
+           {/* Layout start */}         
+              <Route path="/" element={<Layout />}>
+              <Route path="/dashboard" element={         
+              <Dashboard />}  /> 
+              <Route path="dashboard/questions/add" element={<QuestionForm/>}></Route>
+              <Route path="dashboard/exam/create" element={<ExamForm />}></Route>
+              <Route path="exam/:id" element={<ExamDetails />}></Route>
+              
+              <Route path="dashboard/archive-exam-list" element={<ArchiveExam/>}></Route>
+              <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails/>}></Route>
+              <Route path="dashboard/subject-list" element={<SubjectList/>}></Route>
+              <Route path="dashboard/subject-list/:subject" element={<SubjectQuestions/>}></Route>
 
-          {/* <Route path="dashboard/subject-list/:subject" element={SubjectQuestions}> </Route> */}
-          <Route path="dashboard/generate-question" element={<ExamCreator/>}></Route>
+              {/* <Route path="dashboard/subject-list/:subject" element={SubjectQuestions}> </Route> */}
+              <Route path="dashboard/generate-question" element={<ExamCreator/>}></Route>
            </Route>
             {/* Layout end */}
 
