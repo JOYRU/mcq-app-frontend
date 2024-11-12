@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        
         if (token) {
             const decodedUser = jwtDecode(token);
             setUser(decodedUser);
@@ -16,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (token) => {
-        console.log(token)
+       // console.log(token)
         localStorage.setItem('token', token);
         setUser(jwtDecode(token));
     };

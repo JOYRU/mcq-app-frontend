@@ -37,6 +37,7 @@ const Register =async(req,res,next)=>{
 const Login =async(req,res,next)=>{
 
     const  JWT_SECRET_KEY= 'secretKeyMustHave Value' ; 
+   // const [user, setUser] = useState(null);
 
     const { mobile_number, password } = req.body;
         const user = await User.findOne({ mobile_number });
@@ -48,6 +49,7 @@ const Login =async(req,res,next)=>{
     
         const token = jwt.sign({ id: user._id }, JWT_SECRET_KEY, { expiresIn: '1h' });
         res.json({ token });
+       //   setUser({ token }); 
 
 };
 const forgetPassword =async(req,res,next)=>{

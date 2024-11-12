@@ -80,5 +80,69 @@ function App() {
 }
 
 export default App;
+
+
+/*
+
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './AuthProvider';  // Import AuthProvider
+import PrivateRoute from './PrivateRoute';  // Import PrivateRoute
+
+// Components (Example Components)
+import Layout from './Layout';
+import Dashboard from './Dashboard';
+import QuestionForm from './QuestionForm';
+import ExamForm from './ExamForm';
+import ExamDetails from './ExamDetails';
+import ArchiveExam from './ArchiveExam';
+import ArchiveExamDetails from './ArchiveExamDetails';
+import SubjectList from './SubjectList';
+import SubjectQuestions from './SubjectQuestions';
+import Register from './Register';
+import Login from './Login';
+import ForgotPassword from './ForgotPassword';
+import NotAuthorized from './NotAuthorized'; // Not Authorized Page
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="app-container">
+          <div className="content-area">
+            <Routes>
+           
+              <Route path="/" element={<PrivateRoute requiredRoles={['admin', 'teacher']} element={<Layout />} />}>
+                
+            
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="dashboard/questions/add" element={<QuestionForm />} />
+                <Route path="dashboard/exam/create" element={<ExamForm />} />
+                <Route path="dashboard/exam/:id" element={<ExamDetails />} />
+                <Route path="dashboard/archive-exam-list" element={<ArchiveExam />} />
+                <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails />} />
+                <Route path="dashboard/subject-list" element={<SubjectList />} />
+                <Route path="dashboard/subject-list/:subject" element={<SubjectQuestions />} />
+              </Route>
+
+             
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/forget-password" element={<ForgotPassword />} />
+
+              {/* Not Authorized Route 
+              <Route path="/not-authorized" element={<NotAuthorized />} />
+
+              {/* Default redirect to login page 
+              <Route path="/" element={<Navigate to="/login" />} />
+            </Routes>
+          </div>
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+};
+
+export default App;
+*/
         
 
