@@ -39,16 +39,16 @@ const Login =async(req,res,next)=>{
     const  JWT_SECRET_KEY= 'secretKeyMustHave Value' ; 
    // const [user, setUser] = useState(null);
 
-    const { mobile_number, password } = req.body;
-        const user = await User.findOne({ mobile_number });
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
     
         if (!user) return res.status(400).json({ message: 'User not found' });
     
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
     
-        const token = jwt.sign({ id: user._id }, JWT_SECRET_KEY, { expiresIn: '1h' });
-        res.json({ token });
+        const token = jwt.sign({ id: user._id,role:user.role}, JWT_SECRET_KEY, { expiresIn: '1h' });
+         return res.json({ token,message:'User lonin Successfully' });
        //   setUser({ token }); 
 
 };

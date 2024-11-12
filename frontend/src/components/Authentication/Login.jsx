@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const [mobile_number, setMobileNumber] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -16,7 +16,8 @@ const Login = () => {
         setSuccess('');
 
         try {
-            const response = await axios.post('http://localhost:5000/auth/login', { mobile_number, password });
+            const response = await axios.post('http://localhost:5000/auth/login', { email, password });
+            console.log(response) ;
             localStorage.setItem('token', response.data.token);
             setSuccess('Login successful!');
             navigate('/dashboard') ; 
@@ -34,9 +35,9 @@ const Login = () => {
                 {success && <p className="text-green-500">{success}</p>}
                 <input
                     type="text"
-                    value={mobile_number}
-                    onChange={(e) => setMobileNumber(e.target.value)}
-                    placeholder="Mobile Number"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Mail Address"
                     className="border border-gray-300 p-2 mb-4 w-full rounded"
                     required
                 />

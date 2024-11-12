@@ -21,6 +21,7 @@ import Layout from './components/pages/Layout';
 import SubjectList from './components/SubjectList';
 import ExamCreator from './components/Exam/ExamCreator';
 import SubjectQuestions from './components/SujectQuestions';
+import UnauthorizedPage from './components/UnauthorizedPage';
 
 
 function App() {
@@ -35,12 +36,14 @@ function App() {
            <Routes>
            {/* Layout start */}         
               {/* <Route path="/" element={<Layout />}> */}
-              <Route path="/"  element={         
-                  <PrivateRoute>
-                     <Layout />
-                  </PrivateRoute>
+              <Route path="/"  element={                     
+                  <PrivateRoute 
+                    element={Layout}
+                    allowedRoles={['teacher']}              
+                  />
                   }  
-              >               
+              >  
+
               {/* <Route path="/dashboard" element={         
               <Dashboard />}  />  */}
               <Route path="/dashboard" element={         
@@ -66,6 +69,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forget-password" element={<ForgotPassword />} />
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
           <Route path="/" element={<Navigate to="/login" />} />
         </Routes>
@@ -81,68 +85,67 @@ function App() {
 
 export default App;
 
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// import { AuthProvider } from './context/AuthContext';
+// import PrivateRoute from './components/PrivateRoute'; // Import the new PrivateRoute
+// import Dashboard from './components/pages/Dashboard';
+// import QuestionForm from './components/Question/QuestionForm';
+// import ExamForm from './components/Exam/CreateExam';
+// import ExamDetails from './components/Exam/ExamDetails';
+// import Register from './components/Authentication/Register';
+// import Login from './components/Authentication/Login';
+// import ForgotPassword from './components/Authentication/ForgetPassword';
+// import ArchiveExam from './components/Exam/ArchiveExam';
+// import ArchiveExamDetails from './components/Exam/ArchiveExamDetails';
+// import SubjectList from './components/SubjectList';
+// import SubjectQuestions from './components/SujectQuestions';
+// import Layout from './components/pages/Layout';
+// import UnauthorizedPage from './components/UnauthorizedPage'; // Import UnauthorizedPage
 
-/*
+// function App() {
+//   return (
+//     <AuthProvider>
+//       <Router>
+//         <div className="app-container">
+//           <div className="content-area">
+//             <Routes>
+//               {/* Public routes */}
+//               <Route path="/register" element={<Register />} />
+//               <Route path="/login" element={<Login />} />
+//               <Route path="/forget-password" element={<ForgotPassword />} />
+//               <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './AuthProvider';  // Import AuthProvider
-import PrivateRoute from './PrivateRoute';  // Import PrivateRoute
-
-// Components (Example Components)
-import Layout from './Layout';
-import Dashboard from './Dashboard';
-import QuestionForm from './QuestionForm';
-import ExamForm from './ExamForm';
-import ExamDetails from './ExamDetails';
-import ArchiveExam from './ArchiveExam';
-import ArchiveExamDetails from './ArchiveExamDetails';
-import SubjectList from './SubjectList';
-import SubjectQuestions from './SubjectQuestions';
-import Register from './Register';
-import Login from './Login';
-import ForgotPassword from './ForgotPassword';
-import NotAuthorized from './NotAuthorized'; // Not Authorized Page
-
-const App = () => {
-  return (
-    <AuthProvider>
-      <BrowserRouter>
-        <div className="app-container">
-          <div className="content-area">
-            <Routes>
-           
-              <Route path="/" element={<PrivateRoute requiredRoles={['admin', 'teacher']} element={<Layout />} />}>
+//               {/* Protected routes */}
+//               <Route path="/" element={<Navigate to="/login" />} />
+              
+//               {/* Protected Layout route */}
+//               <Route path="/" element={<PrivateRoute allowedRoles={['teacher', 'student']} element={<Layout />} />}>
                 
-            
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="dashboard/questions/add" element={<QuestionForm />} />
-                <Route path="dashboard/exam/create" element={<ExamForm />} />
-                <Route path="dashboard/exam/:id" element={<ExamDetails />} />
-                <Route path="dashboard/archive-exam-list" element={<ArchiveExam />} />
-                <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails />} />
-                <Route path="dashboard/subject-list" element={<SubjectList />} />
-                <Route path="dashboard/subject-list/:subject" element={<SubjectQuestions />} />
-              </Route>
+//                 {/* Teacher-only routes */}
+//                 <Route path="dashboard" element={<PrivateRoute allowedRoles={['teacher']} element={<Dashboard />} />} />
+//                 <Route path="dashboard/questions/add" element={<PrivateRoute allowedRoles={['teacher']} element={<QuestionForm />} />} />
+//                 <Route path="dashboard/exam/create" element={<PrivateRoute allowedRoles={['teacher']} element={<ExamForm />} />} />
 
-             
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/forget-password" element={<ForgotPassword />} />
+//                 {/* Student-only routes */}
+//                 <Route path="dashboard/exam/:id" element={<PrivateRoute allowedRoles={['student']} element={<ExamDetails />} />} />
+//                 <Route path="dashboard/archive-exam-list" element={<PrivateRoute allowedRoles={['student']} element={<ArchiveExam />} />} />
+//                 <Route path="dashboard/archive-exam-list/:id" element={<PrivateRoute allowedRoles={['student']} element={<ArchiveExamDetails />} />} />
 
-              {/* Not Authorized Route 
-              <Route path="/not-authorized" element={<NotAuthorized />} />
+//                 {/* Both Teacher and Student routes */}
+//                 <Route path="dashboard/subject-list" element={<PrivateRoute allowedRoles={['teacher', 'student']} element={<SubjectList />} />} />
+//                 <Route path="dashboard/subject-list/:subject" element={<PrivateRoute allowedRoles={['teacher', 'student']} element={<SubjectQuestions />} />} />
+//               </Route>
+//             </Routes>
+//           </div>
+//         </div>
+//       </Router>
+//     </AuthProvider>
+//   );
+// }
 
-              {/* Default redirect to login page 
-              <Route path="/" element={<Navigate to="/login" />} />
-            </Routes>
-          </div>
-        </div>
-      </BrowserRouter>
-    </AuthProvider>
-  );
-};
+// export default App;
 
-export default App;
-*/
-        
+
+
 

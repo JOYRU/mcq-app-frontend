@@ -1,19 +1,20 @@
 // src/components/PrivateRoute.jsx
 import React, { useContext } from 'react';
- import { Route, Navigate } from 'react-router-dom';
+ import { Route, Navigate  } from 'react-router-dom';
  //import AuthContext from '../contexts/AuthContext'; // Import the AuthContext
  import { useAuth } from '../context/AuthContext';
 
-const PrivateRoute = ({ children }) => {
 
-  const {user} = useAuth();
+// const PrivateRoute = ({ children }) => {
+
+//   const {user} = useAuth();
 
 
-   const token = localStorage.getItem('token') ; 
+//    const token = localStorage.getItem('token') ; 
  
 
-   return token? children:<Navigate to='/login'/>
-};
+//    return token? children:<Navigate to='/login'/>
+// };
 
 
 // const PrivateRoute = ({ element, requiredRoles, ...rest }) => {
@@ -34,5 +35,30 @@ const PrivateRoute = ({ children }) => {
 //   return <Route {...rest} element={element} />;
 // };
 
- export default PrivateRoute;
+const PrivateRoute = ({ element: Element, allowedRoles=[], ...rest }) => {
+  const { user } = useAuth();
+
+  // If user is not logged in, redirect to login page
+  if (!user) {
+      return <Navigate to="/login" />;
+  }
+
+  // If the user's role is not allowed, redirect to unauthorized page or any other page you choose
+  if (!allowedRoles.includes(user.role)) {
+      return <Navigate to="/unauthorized" />;
+  }
+  // if (!Array.isArray(allowedRoles) || !allowedRoles.includes(user.role)) {
+  //   return <Navigate to="/unauthorized" />;
+  //  }
+  console.log(Element) ;
+  return <Element {...rest} />;
+
+  // Render the component if the user is authorized
+  // return <Route {...rest} element={<Element />} />;
+};
+
+export default PrivateRoute;
+
+
+ //export default PrivateRoute;
 
