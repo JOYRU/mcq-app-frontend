@@ -27,7 +27,7 @@ const ExamDetails = () => {
       ///  const response = await axios.get(`http://localhost:5000/questions/${id}`);
         const response2 = await axios.get(`http://localhost:5000/exams/${id}`);
         //console.log(response)  ; 
-        console.log(response2.data.exam[0].questions)  ; 
+       // console.log(response2.data.exam[0].questions)  ; 
         
         if ( response2.data.success) {
           setQuestions(response2.data.exam[0].questions);
@@ -76,7 +76,9 @@ const ExamDetails = () => {
   };
 
   const handleSubmit = async () => {
-    let totalScore = 0;
+    const token = localStorage.getItem('token') ; 
+    let totalScore = 0 ; 
+
 
     for (const question of questions) {
       if (question.correctAnswer === userAnswers[question._id]) {
@@ -87,14 +89,23 @@ const ExamDetails = () => {
     setScore(totalScore);
     
     try{
-      const resultData = {
-        score:totalScore,
-       // examId:id
-     }
+    //   const resultData = {
+    //     score:totalScore,
+    //    // examId:id
+    //  }
      console.log(totalScore)
+     console.log("before exam result call") ; 
 
-      const response =  await axios.post('localhost:5000/exams/exam-result',resultData)
-      console.log(response)
+      const response =  await axios.post('http://localhost:5000/exams/exam-result',{score,id},
+        {
+          headers:{
+          'Authorization':`Bearer ${token}`,
+          'Content-Type':'application/json'
+          }
+        }
+      )
+      //console.log(response);
+      ///console.log("after exam result call")
       alert(`Your score: ${totalScore}/${questions.length}`);
   
     

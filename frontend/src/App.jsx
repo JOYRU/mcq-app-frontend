@@ -48,7 +48,7 @@ function App() {
 
               <Route path="dashboard/questions/add" element={<QuestionForm/>}></Route>
               <Route path="dashboard/exam/create" element={<ExamForm />}></Route>
-              <Route path="exam/:id" element={<ExamDetails />}></Route>
+              <Route path="dashboard/exam/:id" element={<ExamDetails />}></Route>
               
               <Route path="dashboard/archive-exam-list" element={<ArchiveExam/>}></Route>
               <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails/>}></Route>
@@ -56,7 +56,7 @@ function App() {
               <Route path="dashboard/subject-list/:subject" element={<SubjectQuestions/>}></Route>
 
               {/* <Route path="dashboard/subject-list/:subject" element={SubjectQuestions}> </Route> */}
-              <Route path="dashboard/generate-question" element={<ExamCreator/>}></Route>
+              {/* <Route path="dashboard/generate-question" element={<ExamCreator/>}></Route> */}
            </Route>
             {/* Layout end */}
 

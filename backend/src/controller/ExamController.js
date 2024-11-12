@@ -1,5 +1,7 @@
 import Exam from "../models/Exam.js";
 import Question from "../models/Question.js";
+import Result from "../models/Result.js";
+import jwt from 'jsonwebtoken'
 const addExam =async(req,res,next)=>{
 
     const {title, start_time, time_duration } = req.body;
@@ -16,9 +18,34 @@ const addExam =async(req,res,next)=>{
 
 const examResult = async(req,res,next)=>{
 
-  const {examId,score} = req.body ; 
-  console.log(score)
-  res.status(201).json(score) ; 
+  const {score,id} = req.body ; 
+  //console.log(id) ; 
+  const  JWT_SECRET_KEY= 'secretKeyMustHave Value' ; 
+  
+   
+
+  const token = req.headers['authorization'].split(' ')[1] ; 
+  if(!token){
+    return res.status(401).json({message: 'Token missing or invalid'}) ; 
+  }
+
+  const decoded = jwt.verify(token,JWT_SECRET_KEY) ; 
+  const userId = decoded.id ; 
+  
+
+  try{
+    
+       const newResult = new Result({userId,examId:id,score});
+       await newResult.save();
+       res.status(201).json(newResult);
+
+  }catch(error){
+    //console.error('Error saving exam:', error);
+      res.status(500).json({ message: 'Failed to save Result' });
+  }
+
+  
+//  res.status(201).json({message:'succesfully update data in result sheet'}) ; 
 
 }
 const getExams =async(req,res,next)=>{
@@ -40,7 +67,7 @@ const getExams =async(req,res,next)=>{
 const getExam =async(req,res,next)=>{
     
     const{id} = req.params ; 
-    console.log("hello")
+ 
 
   try{
               const exam = await Exam.find({_id:id }).populate('questions')
@@ -59,7 +86,7 @@ const getExam =async(req,res,next)=>{
 const generateQuestion = async(req,res,next)=>{
 
   const { subject, quantity } = req.query; // Subject and quantity of questions
-  console.log(subject) ; 
+ // console.log(subject) ; 
 
   try {
     // const questions = await Question.aggregate([
@@ -67,6 +94,7 @@ const generateQuestion = async(req,res,next)=>{
     //   { $sample: { size: parseInt(quantity) } }  // Randomly select 'quantity' questions
     // ]);
     //const questions = await Question.find({suject:subject})
+
     const questions = "" ; 
     
     res.json(questions);

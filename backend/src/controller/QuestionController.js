@@ -121,8 +121,9 @@ const RandomlySetQuestions =async(req,res,next)=>{
       { $push: { questions: { $each: questions } } },  // Add fetched questions to the exam document
       { new: true }  // Return updated exam
     );
-    console.log(updatedExam) ;
-    res.json(updatedExam); 
+    //console.log(updatedExam) ;
+    res.json(updatedExam) ; 
+    // res.json({success:true,message:'questions generated autometically'}); 
      // Send the updated exam with questions
   } catch (error) {
     console.error('Error fetching random questions and updating exam:', error);

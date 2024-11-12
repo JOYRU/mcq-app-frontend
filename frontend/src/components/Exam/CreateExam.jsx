@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ExamForm = () => {
   const [title, setTitle] = useState('');
@@ -14,6 +15,7 @@ const ExamForm = () => {
   const [randomQuestionsCount, setRandomQuestionsCount] = useState(30);  // Default to 30 questions
   const [subject, setSubject] = useState('');  // New state for subject
 
+  const navigate = useNavigate() ; 
   // Handle form submission to create an exam
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,11 +49,14 @@ const ExamForm = () => {
           examId: examId,
         }
       });
-      console.log(response.data);
+    //  console.log(response.data);
 
       //console.log(response.data[0].options[0]._id);
 
       setQuestions(response.data.exam_id);
+      alert("Succesfully Exam is Created") ; 
+      navigate('/dashboard') ; 
+      
     } catch (error) {
       console.error('Error fetching random questions:', error);
     }

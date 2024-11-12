@@ -52,12 +52,12 @@ return (
         if (isUpcoming || isRunning) {
           return (
             <div key={exm._id} className="bg-white border border-gray-300 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-200">
-              <Link to={`/exam/${exm._id}`}>
+              <Link to={`/dashboard/exam/${exm._id}`}>
                 <h3 className="text-lg font-semibold text-blue-600">{exm.title}</h3>
               </Link>
               <p className="text-gray-500">Start Time: {formattedDate}</p>
               <p className="text-gray-500">Time Duration: {exm.time_duration} Minutes</p>
-              <Link to={`/exam/${exm._id}`}>
+              <Link to={`/dashboard/exam/${exm._id}`}>
                 <h3 className="text-lg font-semibold text-blue-600">Exam Link Here</h3>
               </Link>
               {isUpcoming && <span className="text-green-600">Upcoming</span>}
