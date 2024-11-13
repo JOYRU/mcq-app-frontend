@@ -33,6 +33,8 @@ function App() {
 
        <div className="app-container">
            <div className="content-area">
+           {/* for teacher part start */}
+
            <Routes>
            {/* Layout start */}         
               {/* <Route path="/" element={<Layout />}> */}
@@ -62,6 +64,17 @@ function App() {
               {/* <Route path="dashboard/generate-question" element={<ExamCreator/>}></Route> */}
            </Route>
             {/* Layout end */}
+
+            {/* for teacher end */}
+
+            {/* for student part start */}
+
+           
+
+            {/* for student part last */}
+
+
+
 
 
 

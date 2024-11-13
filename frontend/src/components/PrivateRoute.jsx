@@ -17,45 +17,47 @@ import React, { useContext } from 'react';
 // };
 
 
-// const PrivateRoute = ({ element, requiredRoles, ...rest }) => {
+// const PrivateRoute = ({ element: Element, allowedRoles=[], ...rest }) => {
 //   const { user } = useAuth();
+//   console.log(user)
 
-//   // If the user is not logged in, redirect to login page
 //   if (!user) {
-//     return <Navigate to="/login" />;
+//       return <Navigate to="/login" />;
 //   }
 
-//   // Check if the user role matches the required roles for the route
-//   if (requiredRoles && !requiredRoles.includes(user.role)) {
-//     // If the user role doesn't match, redirect to "Not Authorized" page
-//     return <Navigate to="/not-authorized" />;
+
+//   if (!allowedRoles.includes(user.role)) {
+//       return <Navigate to="/unauthorized" />;
 //   }
 
-//   // If the user is authorized, render the element (route component)
-//   return <Route {...rest} element={element} />;
+  
+//   return <Element {...rest} />;
+
 // };
 
-const PrivateRoute = ({ element: Element, allowedRoles=[], ...rest }) => {
-  const { user } = useAuth();
+const PrivateRoute = ({ element: Element, allowedRoles = [], ...rest }) => {
+  const { user, loading } = useAuth();
+  console.log(user)
 
-  // If user is not logged in, redirect to login page
+  // If user data is still loading, prevent rendering to avoid showing incorrect state
+  if (loading) {
+      return <div>Loading...</div>; // You can customize this with a loading spinner
+  }
+
+  // If no user is logged in, redirect to login page
   if (!user) {
       return <Navigate to="/login" />;
   }
 
-  // If the user's role is not allowed, redirect to unauthorized page or any other page you choose
+  // If the user doesn't have the required role, redirect to unauthorized page
   if (!allowedRoles.includes(user.role)) {
       return <Navigate to="/unauthorized" />;
   }
-  // if (!Array.isArray(allowedRoles) || !allowedRoles.includes(user.role)) {
-  //   return <Navigate to="/unauthorized" />;
-  //  }
-  console.log(Element) ;
-  return <Element {...rest} />;
 
-  // Render the component if the user is authorized
-  // return <Route {...rest} element={<Element />} />;
+  // If the user is authenticated and has the required role, render the component
+  return <Element {...rest} />;
 };
+
 
 export default PrivateRoute;
 

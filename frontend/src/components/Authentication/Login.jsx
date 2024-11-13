@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ const Login = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const navigate =useNavigate() ; 
+    const {login} = useAuth() ; 
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -18,7 +20,9 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:5000/auth/login', { email, password });
             console.log(response) ;
+
             localStorage.setItem('token', response.data.token);
+            login(response.data.token) ; 
             setSuccess('Login successful!');
             navigate('/dashboard') ; 
         
