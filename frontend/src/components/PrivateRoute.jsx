@@ -48,6 +48,8 @@ const PrivateRoute = ({ element: Element, allowedRoles = [], ...rest }) => {
   if (!user) {
       return <Navigate to="/login" />;
   }
+  console.log(allowedRoles) ;
+  console.log(user.role)
 
   // If the user doesn't have the required role, redirect to unauthorized page
   if (!allowedRoles.includes(user.role)) {

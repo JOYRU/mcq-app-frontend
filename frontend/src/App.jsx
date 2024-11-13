@@ -28,71 +28,110 @@ function App() {
 
 
   return (
-   <AuthProvider>
-    <BrowserRouter>
+  //  <AuthProvider>
+  //   <BrowserRouter>
 
-       <div className="app-container">
-           <div className="content-area">
-           {/* for teacher part start */}
+  //      <div className="app-container">
+  //          <div className="content-area">
+  //          {/* for teacher part start */}
 
-           <Routes>
-           {/* Layout start */}         
-              {/* <Route path="/" element={<Layout />}> */}
-              <Route path="/"  element={                     
-                  <PrivateRoute 
-                    element={Layout}
-                    allowedRoles={['teacher']}              
-                  />
-                  }  
-              >  
+  //          <Routes>
+  //          {/* Layout start */}         
+  //             {/* <Route path="/" element={<Layout />}> */}
+  //             <Route path="/"  element={                     
+  //                 <PrivateRoute 
+  //                   element={Layout}
+  //                   allowedRoles={['teacher']}                
+  //                 />
+  //                 }  
+  //             >
 
-              {/* <Route path="/dashboard" element={         
-              <Dashboard />}  />  */}
-              <Route path="/dashboard" element={         
-              <Dashboard />} />
+  //              <Route path="/dashboard" element={         
+  //             <Dashboard />}  />   
+             
+  //             {/* <Route path="/dashboard" element={         
+  //             <Dashboard />} /> */}
 
-              <Route path="dashboard/questions/add" element={<QuestionForm/>}></Route>
-              <Route path="dashboard/exam/create" element={<ExamForm />}></Route>
-              <Route path="dashboard/exam/:id" element={<ExamDetails />}></Route>
+  //             <Route path="dashboard/questions/add" element={<QuestionForm/>}></Route>  
+  //             <Route path="dashboard/exam/create" element={<ExamForm />}></Route>
+  //             <Route path="dashboard/exam/:id" element={<ExamDetails />}></Route>
               
-              <Route path="dashboard/archive-exam-list" element={<ArchiveExam/>}></Route>
-              <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails/>}></Route>
-              <Route path="dashboard/subject-list" element={<SubjectList/>}></Route>
-              <Route path="dashboard/subject-list/:subject" element={<SubjectQuestions/>}></Route>
+  //             <Route path="dashboard/archive-exam-list" element={<ArchiveExam/>}></Route>
+  //             <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails/>}></Route>
+  //             <Route path="dashboard/subject-list" element={<SubjectList/>}></Route>
+  //             <Route path="dashboard/subject-list/:subject" element={<SubjectQuestions/>}></Route>
 
-              {/* <Route path="dashboard/subject-list/:subject" element={SubjectQuestions}> </Route> */}
-              {/* <Route path="dashboard/generate-question" element={<ExamCreator/>}></Route> */}
-           </Route>
-            {/* Layout end */}
+  //             {/* <Route path="dashboard/subject-list/:subject" element={SubjectQuestions}> </Route> */}
+  //             {/* <Route path="dashboard/generate-question" element={<ExamCreator/>}></Route> */}
+  //          </Route>
+  //           {/* Layout end */}
 
-            {/* for teacher end */}
+  //           {/* for teacher end */}
 
-            {/* for student part start */}
-
+  //           {/* for student part start */}
+   
            
 
-            {/* for student part last */}
+  //           {/* for student part last */}
 
+  //         <Route path="/register" element={<Register />} />
+  //         <Route path="/login" element={<Login />} />
+  //         <Route path="/forget-password" element={<ForgotPassword />} />
+  //         <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
+  //         <Route path="/" element={<Navigate to="/login" />} />
+  //       </Routes>
+     
+  //          </div>
+  //      </div>
+        
+ 
+  //   </BrowserRouter>
+  //  </AuthProvider>
+<AuthProvider>
+  <BrowserRouter>
+    <div className="app-container">
+      <div className="content-area">
+        {/* Teacher Routes */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute
+                element={Layout}
+                allowedRoles={['teacher','student']}
+              />
+            }
+          >
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="dashboard/questions/add"
+              element={<PrivateRoute element={QuestionForm} allowedRoles={['teacher']} />}
+            />
+            <Route
+              path="dashboard/exam/create"
+              element={<PrivateRoute element={ExamForm} allowedRoles={['teacher']} />}
+            />
+            <Route path="dashboard/exam/:id" element={<ExamDetails />} />
+            <Route path="dashboard/archive-exam-list" element={<ArchiveExam />} />
+            <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails />} />
+            <Route path="dashboard/subject-list" element={<SubjectList />} />
+            <Route path="dashboard/subject-list/:subject" element={<SubjectQuestions />} />
+          </Route>
 
-
-
-
-
+          {/* Non-Teacher Routes */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forget-password" element={<ForgotPassword />} />
           <Route path="/unauthorized" element={<UnauthorizedPage />} />
-
           <Route path="/" element={<Navigate to="/login" />} />
         </Routes>
-     
-           </div>
-       </div>
-        
- 
-    </BrowserRouter>
-   </AuthProvider>
+      </div>
+    </div>
+  </BrowserRouter>
+</AuthProvider>
+
+
   );
 }
 
