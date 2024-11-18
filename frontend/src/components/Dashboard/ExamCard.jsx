@@ -61,7 +61,14 @@ return (
                 <h3 className="text-lg font-semibold text-blue-600">Exam Link Here</h3>
               </Link>
               {isUpcoming && <span className="text-green-600">Upcoming</span>}
-              {isRunning && <span className="text-yellow-600">Running</span>}
+              {isUpcoming && 
+              
+              <div>
+                <Link to={`/dashboard/exam/update/${exm._id}`}> 
+                <h3 className="text-lg font-semibold text-blue-600">Exam Info Edit</h3>
+               </Link>
+              </div>
+              }
             </div>
           );
         }

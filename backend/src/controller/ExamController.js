@@ -16,6 +16,40 @@ const addExam =async(req,res,next)=>{
 
 };
 
+const updatedExamData = async(req,res,next)=>{
+
+  // try {
+  //   const updatedExam = await Exam.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  //   if (!updatedExam) return res.status(404).json({ message: 'Exam not found' });
+  //   res.json(updatedExam);
+  // } catch (error) {
+  //   res.status(500).json({ message: 'Error updating exam' });
+  // }
+
+  try {
+    const { title, start_time, time_duration, subject, questions } = req.body;
+
+    // Find the exam by ID and update it with the new data
+
+    
+
+
+    const updatedExam = await Exam.findByIdAndUpdate(
+      req.params.id,
+      { title, start_time, time_duration, subject, questions },
+      { new: true }
+    );
+
+    if (!updatedExam) {
+      return res.status(404).json({ message: 'Exam not found' });
+    }
+
+    res.json(updatedExam);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating exam' });
+  }
+}
+
 const examResult = async(req,res,next)=>{
 
   const {score,id} = req.body ; 
@@ -106,4 +140,4 @@ const generateQuestion = async(req,res,next)=>{
 
 
 
-export {addExam,getExams,getExam,examResult,generateQuestion}
+export {addExam,updatedExamData,getExams,getExam,examResult,generateQuestion}

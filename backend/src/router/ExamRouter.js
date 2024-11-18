@@ -1,11 +1,14 @@
 import express from 'express'
-import { addExam , getExams , getExam, generateQuestion, examResult} from '../controller/ExamController.js';
+import { addExam , getExams , getExam, generateQuestion, examResult, updatedExamData} from '../controller/ExamController.js';
 
 const examRouter = express.Router() ;
 examRouter.post('/add',addExam)
 examRouter.get('/',getExams)
 examRouter.get('/:id',getExam)
-examRouter.post('/exam-result',examResult)
+examRouter.put('/update/:id',updatedExamData)
+examRouter.put('/exam-result',examResult)
+
+//const response = await axios.put(`http://localhost:5000/exams/update/${examId}`, updatedExamData);
 examRouter.get('/generate-questions',generateQuestion)
 
 export default examRouter

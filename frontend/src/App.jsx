@@ -22,6 +22,7 @@ import SubjectList from './components/SubjectList';
 import ExamCreator from './components/Exam/ExamCreator';
 import SubjectQuestions from './components/SujectQuestions';
 import UnauthorizedPage from './components/UnauthorizedPage';
+import EditExam from './components/Exam/EditExam';
 
 
 function App() {
@@ -112,6 +113,14 @@ function App() {
               path="dashboard/exam/create"
               element={<PrivateRoute element={ExamForm} allowedRoles={['teacher']} />}
             />
+
+            <Route
+              path="dashboard/exam/update/:id"
+              element={<PrivateRoute element={EditExam} allowedRoles={['teacher']} />}
+            />
+
+            {/* <Route path="/exam/edit/:id" element={<EditExam/>} /> */}
+
             <Route path="dashboard/exam/:id" element={<ExamDetails />} />
             <Route path="dashboard/archive-exam-list" element={<ArchiveExam />} />
             <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails />} />
