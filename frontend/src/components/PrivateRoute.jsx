@@ -37,7 +37,7 @@ import React, { useContext } from 'react';
 
 const PrivateRoute = ({ element: Element, allowedRoles = [], ...rest }) => {
   const { user, loading } = useAuth();
-  console.log(user)
+ 
 
   // If user data is still loading, prevent rendering to avoid showing incorrect state
   if (loading) {
@@ -48,8 +48,7 @@ const PrivateRoute = ({ element: Element, allowedRoles = [], ...rest }) => {
   if (!user) {
       return <Navigate to="/login" />;
   }
-  console.log(allowedRoles) ;
-  console.log(user.role)
+  
 
   // If the user doesn't have the required role, redirect to unauthorized page
   if (!allowedRoles.includes(user.role)) {

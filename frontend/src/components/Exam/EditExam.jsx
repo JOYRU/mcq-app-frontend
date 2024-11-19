@@ -541,7 +541,8 @@ const handleEditQuestion = (questionId, field, value, optionIndex = null) => {
   <label className="block text-sm font-medium mb-1">Option 1:</label>
   <input
     type="text"
-    value={question.options[0].option1}
+    // value={question.options[0].option1}
+    value={question.options.option1}
     onChange={(e) => handleEditQuestion(question._id, 'option1', e.target.value, 0)}  // Pass option index
     className="w-full border border-gray-300 rounded p-2"
   />
@@ -551,7 +552,8 @@ const handleEditQuestion = (questionId, field, value, optionIndex = null) => {
   <label className="block text-sm font-medium mb-1">Option 2:</label>
   <input
     type="text"
-    value={question.options[0].option2}
+    // value={question.options[0].option2}
+    value={question.options.option2}
     onChange={(e) => handleEditQuestion(question._id, 'option2', e.target.value, 1)}  // Pass option index
     className="w-full border border-gray-300 rounded p-2"
   />
@@ -561,7 +563,8 @@ const handleEditQuestion = (questionId, field, value, optionIndex = null) => {
   <label className="block text-sm font-medium mb-1">Option 3:</label>
   <input
     type="text"
-    value={question.options[0].option3}
+    // value={question.options[0].option3}
+    value={question.options.option3}
     onChange={(e) => handleEditQuestion(question._id, 'option3', e.target.value, 2)}  // Pass option index
     className="w-full border border-gray-300 rounded p-2"
   />
@@ -571,7 +574,8 @@ const handleEditQuestion = (questionId, field, value, optionIndex = null) => {
   <label className="block text-sm font-medium mb-1">Option 4:</label>
   <input
     type="text"
-    value={question.options[0].option4}
+    // value={question.options[0].option4}
+    value={question.options.option1}
     onChange={(e) => handleEditQuestion(question._id, 'option4', e.target.value, 3)}  // Pass option index
     className="w-full border border-gray-300 rounded p-2"
   />

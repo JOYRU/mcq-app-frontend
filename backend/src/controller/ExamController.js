@@ -18,36 +18,70 @@ const addExam =async(req,res,next)=>{
 
 const updatedExamData = async(req,res,next)=>{
 
-  // try {
-  //   const updatedExam = await Exam.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  //   if (!updatedExam) return res.status(404).json({ message: 'Exam not found' });
-  //   res.json(updatedExam);
-  // } catch (error) {
-  //   res.status(500).json({ message: 'Error updating exam' });
-  // }
+
 
   try {
+    const { id } = req.params;
     const { title, start_time, time_duration, subject, questions } = req.body;
 
-    // Find the exam by ID and update it with the new data
-
-    
-
-
-    const updatedExam = await Exam.findByIdAndUpdate(
-      req.params.id,
-      { title, start_time, time_duration, subject, questions },
-      { new: true }
-    );
-
-    if (!updatedExam) {
+    // Update the Exam document
+    let exam = await Exam.findById(id);
+    if (!exam) {
       return res.status(404).json({ message: 'Exam not found' });
     }
+ 
 
-    res.json(updatedExam);
+    // Update Exam properties
+    exam.title = title;
+    exam.start_time = start_time;
+    exam.time_duration = time_duration;
+    exam.subject = subject;
+    //console.log(questions)
+
+    // Update each question inside the questions array
+    for (const question of questions) {
+      // Find the question by its ID
+     
+      let existingQuestion = await Question.findById(question._id);
+      console.log(existingQuestion)
+      if (existingQuestion) {
+       
+        existingQuestion.title = question.title;
+        existingQuestion.options[0].option1 = question.option1;
+        existingQuestion.options[0].option2 = question.option2;
+        existingQuestion.options[0].option3 = question.option3;
+        existingQuestion.options[0].option4 = question.option4;
+      
+
+        existingQuestion.correctAnswer = question.correctAnswer;
+
+        // Save the updated question
+        await existingQuestion.save();
+      } else {
+        // If the question doesn't exist, you might want to create a new one
+        const newQuestion = new Question({
+          title: question.updatedTitle,
+          options: question.updatedOptions,
+          correctAnswer: question.correctAnswer,
+        });
+
+        // Save the new question and add its ID to the exam
+        await newQuestion.save();
+        exam.questions.push(newQuestion._id);
+      }
+    }
+
+    // Save the updated exam
+    await exam.save();
+
+    res.status(200).json({ message: 'Exam updated successfully' });
   } catch (error) {
-    res.status(500).json({ message: 'Error updating exam' });
+    console.error(error);
+    res.status(500).json({ message: 'Error updating exam', error });
   }
+
+
+
 }
 
 const examResult = async(req,res,next)=>{
@@ -77,6 +111,8 @@ const examResult = async(req,res,next)=>{
     //console.error('Error saving exam:', error);
       res.status(500).json({ message: 'Failed to save Result' });
   }
+
+  
 
   
 //  res.status(201).json({message:'succesfully update data in result sheet'}) ; 
