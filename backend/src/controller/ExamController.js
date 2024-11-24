@@ -68,6 +68,34 @@ const examResult = async(req,res,next)=>{
       res.status(500).json({ message: 'Failed to save Result' });
   }
 
+}
+  const examResultTeacher = async(req,res,next)=>{
+
+    // const  JWT_SECRET_KEY= 'secretKeyMustHave Value' ; 
+    // const token = req.headers['authorization'].split(' ')[1] ; 
+    // if(!token){
+    //   return res.status(401).json({message: 'Token missing or invalid'}) ; 
+    // }
+  
+    // const decoded = jwt.verify(token,JWT_SECRET_KEY) ; 
+    // const userId = decoded.id ; 
+    const{id} = req.params ; 
+ 
+
+    try{
+                const examResult = await Result.find({examId:id }).populate('userId')
+                return res.status(200).json({
+                    success:true,
+                    examResult
+                })
+               
+    }catch(error){
+               alert(error) 
+               return res.status(500).json({success:false,error:"get exam sever error"})
+            }
+    
+
+
   
 
   
@@ -132,4 +160,4 @@ const generateQuestion = async(req,res,next)=>{
 
 
 
-export {addExam,updatedExamData,getExams,getExam,examResult,generateQuestion}
+export {addExam,updatedExamData,getExams,getExam,examResult,generateQuestion,examResultTeacher}

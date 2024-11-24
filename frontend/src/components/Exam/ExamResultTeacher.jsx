@@ -1,10 +1,11 @@
 
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment"; // You can use moment.js for date comparison
 
-const ArchiveExam = () => {
+const ExamResultTeacher = () => {
   const [exams, setExams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1); // Track current page
@@ -137,6 +138,4 @@ const ArchiveExam = () => {
   );
 };
 
-export default ArchiveExam;
-
-
+export default ExamResultTeacher;
