@@ -18,70 +18,26 @@ const addExam =async(req,res,next)=>{
 
 const updatedExamData = async(req,res,next)=>{
 
-
-
   try {
-    const { id } = req.params;
-    const { title, start_time, time_duration, subject, questions } = req.body;
+    const updatedExam = await Exam.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
-    // Update the Exam document
-    let exam = await Exam.findById(id);
-    if (!exam) {
-      return res.status(404).json({ message: 'Exam not found' });
-    }
- 
+    // Check if questions are being updated as well
+    if (req.body.questions) {
+      // Loop through all questions and update each one
+      await Promise.all(req.body.questions.map(async (question) => {
+        // Ensure options are properly structured
+        const updatedOptions = question.options[0] || {};
+        question.options = [updatedOptions];  // Ensure options is an array with an object inside
 
-    // Update Exam properties
-    exam.title = title;
-    exam.start_time = start_time;
-    exam.time_duration = time_duration;
-    exam.subject = subject;
-    //console.log(questions)
-
-    // Update each question inside the questions array
-    for (const question of questions) {
-      // Find the question by its ID
-     
-      let existingQuestion = await Question.findById(question._id);
-      console.log(existingQuestion)
-      if (existingQuestion) {
-       
-        existingQuestion.title = question.title;
-        existingQuestion.options[0].option1 = question.option1;
-        existingQuestion.options[0].option2 = question.option2;
-        existingQuestion.options[0].option3 = question.option3;
-        existingQuestion.options[0].option4 = question.option4;
-      
-
-        existingQuestion.correctAnswer = question.correctAnswer;
-
-        // Save the updated question
-        await existingQuestion.save();
-      } else {
-        // If the question doesn't exist, you might want to create a new one
-        const newQuestion = new Question({
-          title: question.updatedTitle,
-          options: question.updatedOptions,
-          correctAnswer: question.correctAnswer,
-        });
-
-        // Save the new question and add its ID to the exam
-        await newQuestion.save();
-        exam.questions.push(newQuestion._id);
-      }
+        await Question.findByIdAndUpdate(question._id, question);
+      }));
     }
 
-    // Save the updated exam
-    await exam.save();
-
-    res.status(200).json({ message: 'Exam updated successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error updating exam', error });
+    res.status(200).json(updatedExam);
+  } catch (err) {
+    console.error('Error updating exam:', err);
+    res.status(500).json({ message: 'Server error' });
   }
-
-
-
 }
 
 const examResult = async(req,res,next)=>{
