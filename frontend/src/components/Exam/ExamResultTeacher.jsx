@@ -81,7 +81,7 @@ const ExamResultTeacher = () => {
               className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
             >
               <Link
-                to={`/dashboard/archive-exam-list/${exam._id}`}
+                to={`/dashboard/exam/result/${exam._id}`}  
                 className={`block text-lg font-semibold mb-2 ${
                   exam.isFinished ? "text-green-600" : "text-red-600"
                 } hover:underline`}

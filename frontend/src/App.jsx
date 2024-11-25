@@ -24,6 +24,7 @@ import SubjectQuestions from './components/SujectQuestions';
 import UnauthorizedPage from './components/UnauthorizedPage';
 import EditExam from './components/Exam/EditExam';
 import ExamResultTeacher from './components/Exam/ExamResultTeacher';
+import ExamResultExamId from './components/Exam/ExamResultExamId';
 
 
 function App() {
@@ -119,9 +120,14 @@ function App() {
               path="dashboard/exam/update/:id"
               element={<PrivateRoute element={EditExam} allowedRoles={['teacher']} />}
             />
+
             <Route
               path="dashboard/exam/result"
               element={<PrivateRoute element={ExamResultTeacher} allowedRoles={['teacher']} />}
+            />
+             <Route
+              path="dashboard/exam/result/:id"
+              element={<PrivateRoute element={ExamResultExamId} allowedRoles={['teacher']} />}
             />
 
             {/* <Route path="/exam/edit/:id" element={<EditExam/>} /> */}

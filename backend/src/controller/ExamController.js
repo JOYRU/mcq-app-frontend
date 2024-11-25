@@ -83,7 +83,8 @@ const examResult = async(req,res,next)=>{
  
 
     try{
-                const examResult = await Result.find({examId:id }).populate('userId')
+                const examResult = await Result.find({examId:id }).populate('userId') ; 
+                //console.log(examResult) ; 
                 return res.status(200).json({
                     success:true,
                     examResult
