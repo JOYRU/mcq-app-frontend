@@ -89,14 +89,11 @@ const ExamDetails = () => {
     setScore(totalScore);
     
     try{
-    //   const resultData = {
-    //     score:totalScore,
-    //    // examId:id
-    //  }
+    
      console.log(totalScore)
      console.log("before exam result call") ; 
 
-      const response =  await axios.post('http://localhost:5000/exams/exam-result',{score,id},
+      const response =  await axios.post('http://localhost:5000/exams/exam-result',{totalScore,id},
         {
           headers:{
           'Authorization':`Bearer ${token}`,

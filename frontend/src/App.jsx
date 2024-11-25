@@ -25,72 +25,14 @@ import UnauthorizedPage from './components/UnauthorizedPage';
 import EditExam from './components/Exam/EditExam';
 import ExamResultTeacher from './components/Exam/ExamResultTeacher';
 import ExamResultExamId from './components/Exam/ExamResultExamId';
+import ExamResultStudent from './components/Exam/ExamResultStudent';
 
 
 function App() {
 
 
   return (
-  //  <AuthProvider>
-  //   <BrowserRouter>
 
-  //      <div className="app-container">
-  //          <div className="content-area">
-  //          {/* for teacher part start */}
-
-  //          <Routes>
-  //          {/* Layout start */}         
-  //             {/* <Route path="/" element={<Layout />}> */}
-  //             <Route path="/"  element={                     
-  //                 <PrivateRoute 
-  //                   element={Layout}
-  //                   allowedRoles={['teacher']}                
-  //                 />
-  //                 }  
-  //             >
-
-  //              <Route path="/dashboard" element={         
-  //             <Dashboard />}  />   
-             
-  //             {/* <Route path="/dashboard" element={         
-  //             <Dashboard />} /> */}
-
-  //             <Route path="dashboard/questions/add" element={<QuestionForm/>}></Route>  
-  //             <Route path="dashboard/exam/create" element={<ExamForm />}></Route>
-  //             <Route path="dashboard/exam/:id" element={<ExamDetails />}></Route>
-              
-  //             <Route path="dashboard/archive-exam-list" element={<ArchiveExam/>}></Route>
-  //             <Route path="dashboard/archive-exam-list/:id" element={<ArchiveExamDetails/>}></Route>
-  //             <Route path="dashboard/subject-list" element={<SubjectList/>}></Route>
-  //             <Route path="dashboard/subject-list/:subject" element={<SubjectQuestions/>}></Route>
-
-  //             {/* <Route path="dashboard/subject-list/:subject" element={SubjectQuestions}> </Route> */}
-  //             {/* <Route path="dashboard/generate-question" element={<ExamCreator/>}></Route> */}
-  //          </Route>
-  //           {/* Layout end */}
-
-  //           {/* for teacher end */}
-
-  //           {/* for student part start */}
-   
-           
-
-  //           {/* for student part last */}
-
-  //         <Route path="/register" element={<Register />} />
-  //         <Route path="/login" element={<Login />} />
-  //         <Route path="/forget-password" element={<ForgotPassword />} />
-  //         <Route path="/unauthorized" element={<UnauthorizedPage />} />
-
-  //         <Route path="/" element={<Navigate to="/login" />} />
-  //       </Routes>
-     
-  //          </div>
-  //      </div>
-        
- 
-  //   </BrowserRouter>
-  //  </AuthProvider>
 <AuthProvider>
   <BrowserRouter>
     <div className="app-container">
@@ -128,6 +70,11 @@ function App() {
              <Route
               path="dashboard/exam/result/:id"
               element={<PrivateRoute element={ExamResultExamId} allowedRoles={['teacher']} />}
+            />
+
+              <Route
+              path="dashboard/exam/previous-result"
+              element={<PrivateRoute element={ExamResultStudent}  allowedRoles={['student']} />}
             />
 
             {/* <Route path="/exam/edit/:id" element={<EditExam/>} /> */}

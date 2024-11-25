@@ -84,6 +84,9 @@ const Sidebar =()=> {
             <NavLink to="dashboard/exam/result" className="flex items-center space-x-4 block py-2.5 px-4 rounded">
               <span>Show Result Exams</span>
             </NavLink>
+           
+       
+
           </>
         )}
 
@@ -95,6 +98,9 @@ const Sidebar =()=> {
             </NavLink>
             <NavLink to="/dashboard/subject-list" className="flex items-center space-x-4 block py-2.5 px-4 rounded">
               <span>Subject Wise Question</span>
+            </NavLink>
+            <NavLink to="/dashboard/exam/previous-result" className="flex items-center space-x-4 block py-2.5 px-4 rounded">
+              <span>Show Previous Result</span>
             </NavLink>
           </>
         )}

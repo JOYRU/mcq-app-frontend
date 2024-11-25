@@ -42,7 +42,7 @@ const updatedExamData = async(req,res,next)=>{
 
 const examResult = async(req,res,next)=>{
 
-  const {score,id} = req.body ; 
+  const {totalScore,id} = req.body ; 
   //console.log(id) ; 
   const  JWT_SECRET_KEY= 'secretKeyMustHave Value' ; 
   
@@ -59,7 +59,7 @@ const examResult = async(req,res,next)=>{
 
   try{
     
-       const newResult = new Result({userId,examId:id,score});
+       const newResult = new Result({userId,examId:id,score:totalScore});
        await newResult.save();
        res.status(201).json(newResult);
 
@@ -70,18 +70,8 @@ const examResult = async(req,res,next)=>{
 
 }
   const examResultTeacher = async(req,res,next)=>{
-
-    // const  JWT_SECRET_KEY= 'secretKeyMustHave Value' ; 
-    // const token = req.headers['authorization'].split(' ')[1] ; 
-    // if(!token){
-    //   return res.status(401).json({message: 'Token missing or invalid'}) ; 
-    // }
-  
-    // const decoded = jwt.verify(token,JWT_SECRET_KEY) ; 
-    // const userId = decoded.id ; 
     const{id} = req.params ; 
  
-
     try{
                 const examResult = await Result.find({examId:id }).populate('userId') ; 
                 //console.log(examResult) ; 
@@ -94,15 +84,47 @@ const examResult = async(req,res,next)=>{
                alert(error) 
                return res.status(500).json({success:false,error:"get exam sever error"})
             }
-    
-
-
-  
-
   
 //  res.status(201).json({message:'succesfully update data in result sheet'}) ; 
 
 }
+
+const studentExamResult = async(req,res,next)=>{
+  // const{id} = req.params ; 
+ /// const  JWT_SECRET_KEY= 'secretKeyMustHave Value' ; 
+ // console.log('hellofromBackend')
+  // const token = req.headers['authorization'].split(' ')[1] ; 
+  // if(!token){
+  //   return res.status(401).json({message: 'Token missing or invalid'}) ; 
+  // }
+  // console.log(token)
+
+  // const decoded = jwt.verify(token,JWT_SECRET_KEY) ; 
+  // const userId = decoded.id ; 
+
+  // try{
+  //             const examResult = await Result.find({userId }).populate('examId') ; 
+  //             console.log(examResult) ; 
+  //             return res.status(200).json({
+  //                 success:true,
+  //                 examResult
+  //             })
+             
+  // }catch(error){
+  //            alert(error) 
+  //            return res.status(500).json({success:false,error:"get exam sever error"})
+  //         }
+
+  res.status(201).json({message:'succesfully update data in result sheet'}) ; 
+
+}
+
+const faltu = async(req,res,next)=>{
+
+  res.status(201).json({message:'succesfully update data in result sheet'}) ; 
+}
+
+
 const getExams =async(req,res,next)=>{
 
     try{
@@ -161,4 +183,4 @@ const generateQuestion = async(req,res,next)=>{
 
 
 
-export {addExam,updatedExamData,getExams,getExam,examResult,generateQuestion,examResultTeacher}
+export {addExam,updatedExamData,getExams,getExam,examResult,generateQuestion,examResultTeacher , studentExamResult , faltu}
