@@ -152,10 +152,14 @@ const ExamForm = () => {
             className="block w-full border border-gray-300 rounded p-2"
             required
           >
-            <option value="">-- Select Subject --</option>
+            <option value="">-- Select Subject --</option>          
+            <option value="bangla1st">Bangla 1st Paper</option>
+            <option value="bangla2nd">Bangla 2nd Paper</option>
+            <option value="physics">Physics</option>
             <option value="math">Math</option>
-            <option value="science">Science</option>
-            <option value="history">History</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="biology">Biology</option>
+
             {/* Add more subjects as needed */}
           </select>
         </div>

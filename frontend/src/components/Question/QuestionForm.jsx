@@ -131,6 +131,7 @@ fetchExams() ;
     onChange={(e) => setSubject(e.target.value)}
     className="block w-full border border-gray-300 rounded p-2"
   >
+    <option value="">-- Select Subject --</option>  
     <option value="bangla1st">Bangla 1st Paper</option>
     <option value="bangla2nd">Bangla 2nd Paper</option>
     <option value="physics">Physics</option>
