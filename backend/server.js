@@ -12,7 +12,17 @@ import authRouter from "./src/router/AuthRouter.js";
 const app = express();
 // const PORT = process.env.PORT || 5010;
 const PORT = 5000 ;
-app.use(cors());
+
+const corsOptions = {
+    origin: '',  // Allow only this origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],     // Allow specific methods
+    allowedHeaders: ['Content-Type', 'Authorization'],  // Allow specific headers
+  };
+  
+  // Enable CORS with the specified options
+  app.use(cors(corsOptions));
+app.use(cors())
+//app.use(cors());
 app.use(bodyParser.json());
 
 //  const mongodbURL = process.env.mongodbURL ; 
