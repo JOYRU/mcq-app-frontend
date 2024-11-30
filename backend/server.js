@@ -26,7 +26,7 @@ app.use(cors())
 app.use(bodyParser.json());
 
 //  const mongodbURL = process.env.mongodbURL ; 
- const mongodbURL = "mongodb+srv://joycseru:f01765711177@cluster0.l9t1yml.mongodb.net/mcq-app2"  ; 
+// const mongodbURL = "mongodb+srv://joycseru:f01765711177@cluster0.l9t1yml.mongodb.net/mcq-app2"  ; 
 
  app.use('/questions',questionRouter)
  app.use('/exams',examRouter)
@@ -34,19 +34,15 @@ app.use(bodyParser.json());
 
  
  // connect to db and run server 
- app.listen(PORT,async()=>{   
-    // console.log('server is running on port') ; 
-     console.log(`Server is running on http://localhost:${PORT}`);   
-     await mongoose.connect(mongodbURL) ; 
-    //connectDB() ; 
-     console.log('Connection to db Successfully established') ;
- })
+//  app.listen(PORT,async()=>{   
+//     // console.log('server is running on port') ; 
+//      console.log(`Server is running on http://localhost:${PORT}`);   
+//      await mongoose.connect(mongodbURL) ; 
+//     //connectDB() ; 
+//      console.log('Connection to db Successfully established') ;
+//  })
 
  app.get('/', (req, res) => {
     res.send('Hello, world!');
-  });
-  
-  app.get('/path', (req, res) => {
-    res.send('path, world!');
   });
   
