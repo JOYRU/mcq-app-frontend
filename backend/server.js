@@ -46,3 +46,7 @@ app.use(bodyParser.json());
     res.send('Hello, world!');
   });
   
+  app.get('/path', (req, res) => {
+    res.send('path, world!');
+  });
+  
