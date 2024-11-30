@@ -26,7 +26,7 @@ app.use(cors())
 app.use(bodyParser.json());
 
 //  const mongodbURL = process.env.mongodbURL ; 
-// const mongodbURL = "mongodb+srv://joycseru:f01765711177@cluster0.l9t1yml.mongodb.net/mcq-app2"  ; 
+ const mongodbURL = "mongodb+srv://joycseru:f01765711177@cluster0.l9t1yml.mongodb.net/mcq-app2"  ; 
 
  app.use('/questions',questionRouter)
  app.use('/exams',examRouter)
@@ -41,6 +41,23 @@ app.use(bodyParser.json());
 //     //connectDB() ; 
 //      console.log('Connection to db Successfully established') ;
 //  })
+
+const connectMongoDB = async () => {
+    try {
+      //const mongoURI = process.env.MONGODB_URI; // Get MongoDB URI from environment variable
+      await mongoose.connect(mongodbURL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+     // console.log('MongoDB Connected!');
+    } catch (err) {
+      console.error('Error connecting to MongoDB:', err);
+      process.exit(1); // Exit the process if connection fails
+    }
+  };
+  
+  // Connect to MongoDB
+  connectMongoDB();
 
  app.get('/', (req, res) => {
     res.send('Hello, world!');
