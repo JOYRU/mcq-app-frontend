@@ -42,3 +42,7 @@ app.use(bodyParser.json());
      console.log('Connection to db Successfully established') ;
  })
 
+ app.get('/', (req, res) => {
+    res.send('Hello, world!');
+  });
+  
